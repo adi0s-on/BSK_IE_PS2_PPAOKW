@@ -69,6 +69,9 @@
         </Grid>
         
         <Grid Margin="200 40 0 0">
+            <materialDesign:TransitioningContent OpeningEffect="{materialDesign:TransitionEffect ExpandIn, Duration=0:0:0.5}">
+                <Image Source="Assets/Hello.jpg" Width="Auto" Height="Auto" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            </materialDesign:TransitioningContent>
             <Grid x:Name="MainGrid"/>
         </Grid>
         
