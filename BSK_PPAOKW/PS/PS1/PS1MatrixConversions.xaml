@@ -1,0 +1,61 @@
+﻿<UserControl x:Class="BSK_PPAOKW.PS.PS1MatrixConversions"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:BSK_PPAOKW.PS"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+             d:DesignHeight="730" d:DesignWidth="1240">
+
+
+    <Grid Background="#dbdbdb">
+
+        <Grid Width="610" HorizontalAlignment="Left">
+            <StackPanel Orientation="Vertical">
+                <TextBlock Width="110" Text="Encrypt" HorizontalAlignment="Center" Margin="0 20 0 0" FontSize="26" TextAlignment="Left" Foreground="#222831"/>
+            </StackPanel>
+
+
+            <TextBlock Width="270" Height="20"  VerticalAlignment="Top" HorizontalAlignment="Right" FontSize="15" Margin="0,88,320,0" Foreground="#393e46" Text="Enter text to encrypt"/>
+            <TextBox Width="270" Height="150" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,110,320,0" FontSize="14" ToolTip="Enter text to encrypt" BorderBrush="#393e46" BorderThickness="1 1 1 1" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" Background="#EEEEEE" AcceptsReturn="True"/>
+
+            <TextBlock Width="135" Height="20"  VerticalAlignment="Top" HorizontalAlignment="Right" FontSize="15" Margin="0,270,455,0" Foreground="#393e46"><Run Text="Enter "/><Run Text="key"/></TextBlock>
+            <TextBox Width="175" Height="30" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,292,415,0" FontSize="14" ToolTip="Enter number N" BorderBrush="#393e46" BorderThickness="1 1 1 1" TextWrapping="Wrap" Background="#EEEEEE" MaxLength="10"/>
+            <Button Width="80" Height="30" VerticalAlignment="Top" HorizontalAlignment="Right" Background="#00adb5" BorderBrush="#393e46" Margin="0,292,320,0" Content="Encrypt" Foreground="#222831" Padding="0" FontSize="15" />
+
+            <TextBlock Width="200" Height="20"  VerticalAlignment="Top" HorizontalAlignment="Right" FontSize="15" Margin="0,88,100,0" Foreground="#393e46" Text="Result"/>
+            <TextBox Width="280" Height="150" VerticalAlignment="Top" HorizontalAlignment="Right" ToolTip="Result" BorderBrush="#393e46" BorderThickness="1 1 1 1" Margin="0,110,20,0" IsReadOnly="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" TextChanged="TextBox_TextChanged" Background="#EEEEEE"/>
+
+            <TextBlock Width="200" Height="20"  VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="15" Margin="120,525,0,0" Foreground="#393e46" Text="Result"/>
+            <Button Width="80" Height="30" VerticalAlignment="Top" HorizontalAlignment="Right" Background="#00adb5" BorderBrush="#393e46" Margin="0,545,510,0" Content="Upload file" Foreground="#222831" Padding="0" FontSize="15"/>
+            <Button Width="80" Height="30" VerticalAlignment="Top" HorizontalAlignment="Right" Background="#00adb5" BorderBrush="#393e46" Margin="0,580,510,0" Content="Encrypt" Foreground="#222831" Padding="0" FontSize="15" />
+            <TextBox Height="150" VerticalAlignment="Top" ToolTip="Result" BorderBrush="#393e46" BorderThickness="1 1 1 1" Margin="0,545,20,0" IsReadOnly="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" TextChanged="TextBox_TextChanged" Background="#EEEEEE" HorizontalAlignment="Right" Width="470"/>
+
+        </Grid>
+
+        <Grid Width="6" Background="#3a4750"/>
+
+        <Grid Width="610" HorizontalAlignment="Right">
+            <StackPanel Orientation="Vertical">
+                <TextBlock Width="110" Text="Decrypt" HorizontalAlignment="Center" Margin="0 20 0 0" FontSize="26" TextAlignment="Right" Foreground="#222831" />
+            </StackPanel>
+
+            <TextBlock Width="270" Height="20"  VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="15" Margin="20 88 0 0" Foreground="#393e46" Text="Enter text to decrypt"/>
+            <TextBox Width="270" Height="150" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="20 110 0 0" FontSize="14" ToolTip="Enter text to decrypt" BorderBrush="#393e46" BorderThickness="1 1 1 1" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" Background="#EEEEEE" AcceptsReturn="True"/>
+
+            <TextBlock Width="135" Height="20"  VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="15" Margin="20,270,0,0" Foreground="#393e46"><Run Text="Enter "/><Run Text="key"/></TextBlock>
+            <TextBox Width="175" Height="30" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="20,292,0,0" FontSize="14" ToolTip="Enter number N" BorderBrush="#393e46" BorderThickness="1 1 1 1" TextWrapping="Wrap" Background="#EEEEEE" MaxLength="10"/>
+            <Button Width="80" Height="30" VerticalAlignment="Top" HorizontalAlignment="Left" Background="#00adb5" BorderBrush="#393e46" Margin="210,292,0,0" Content="Decrypt" Foreground="#222831" Padding="0" FontSize="15" />
+
+            <TextBlock Width="200" Height="20"  VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="15" Margin="310,88,0,0" Foreground="#393e46" Text="Result"/>
+            <TextBox Height="150" VerticalAlignment="Top" ToolTip="Result" BorderBrush="#393e46" BorderThickness="1 1 1 1" Margin="310,110,0,0" IsReadOnly="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" HorizontalAlignment="Left" Width="280" Background="#EEEEEE"/>
+
+            <TextBlock Width="200" Height="20"  VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="15" Margin="120,525,0,0" Foreground="#393e46" Text="Result"/>
+            <Button Width="80" Height="30" VerticalAlignment="Top" HorizontalAlignment="Left" Background="#00adb5" BorderBrush="#393e46" Margin="20,545,0,0" Content="Upload file" Foreground="#222831" Padding="0" FontSize="15"/>
+            <Button Width="80" Height="30" VerticalAlignment="Top" HorizontalAlignment="Left" Background="#00adb5" BorderBrush="#393e46" Margin="20,580,0,0" Content="Decrypt" Foreground="#222831" Padding="0" FontSize="15" />
+            <TextBox Width="470" Height="150" VerticalAlignment="Top" HorizontalAlignment="Left" ToolTip="Result" BorderBrush="#393e46" BorderThickness="1 1 1 1" Margin="120,545,0,0" IsReadOnly="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" TextChanged="TextBox_TextChanged" Background="#EEEEEE"/>
+        </Grid>
+
+    </Grid>
+</UserControl>

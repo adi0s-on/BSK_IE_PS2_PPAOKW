@@ -10,7 +10,7 @@
     <Grid Background="#FFF1F1F1">
         <StackPanel>
             <Grid Background="#303841" Height="40" MouseDown="TitleBar_MouseDown">
-                <TextBlock Text="BSK PPAOKW" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0 7 0 0 " FontFamily="Arial" FontSize="20" Foreground="#eeeeee"/>
+                <TextBlock Text="BSK PPAOKW" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0 7 0 0 " FontFamily="Century Gothic" FontSize="20" Foreground="#eeeeee"/>
 
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                     <Button Width="30" Height="30" Padding="0" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#eeeeee" HorizontalAlignment="Right" Margin="0 0 5 0" Click="MinimizeThisApp">
@@ -24,10 +24,13 @@
         </StackPanel>
 
         <Grid Background="#3a4750" Width="200" Height="770" HorizontalAlignment="Left" VerticalAlignment="Bottom">
-            <Grid Width="10" HorizontalAlignment="Left" Height="60" VerticalAlignment="Top" Margin="0 50" Background="#00adb5"/>
-            <ListView Margin="0 50">
+            
+            <materialDesign:TransitioningContent x:Name="TransitionSlide" OpeningEffect="{materialDesign:TransitionEffect SlideInFromLeft, Duration=0:0:0.2}">
+                <Grid x:Name="MenuCursor" Width="10" HorizontalAlignment="Left" Height="60" VerticalAlignment="Top" Margin="0 50" Background="#00adb5"/>
+            </materialDesign:TransitioningContent>
 
-                <ListViewItem Height="60" Margin="0 0 0 0">
+            <ListView x:Name="ListViewMenu" Margin="0 50" SelectionChanged="ListViewMenu_SelectionChanged">
+                <ListViewItem Height="60" Margin="0 0 0 0" Selected="ListViewItem_Selected_1">
                     <StackPanel Orientation="Horizontal">
                         <Grid >
                             <materialDesign:PackIcon Kind="Filter1" Height="35" Width="35" HorizontalAlignment="Center" Margin="10 0 10 0" Foreground="#eeeeee"/>
@@ -36,7 +39,7 @@
                     </StackPanel>
                 </ListViewItem>
                 
-                <ListViewItem Height="60" Margin="0 0 0 0">
+                <ListViewItem Height="60" Margin="0 0 0 0" Selected="ListViewItem_Selected">
                     <StackPanel Orientation="Horizontal">
                         <Grid >
                             <materialDesign:PackIcon Kind="Filter2" Height="35" Width="35" HorizontalAlignment="Center" Margin="10 0 10 0" Foreground="#eeeeee"/>
@@ -53,7 +56,7 @@
                         <TextBlock Text="PS. 3" VerticalAlignment="Center" FontSize="20" Foreground="#EEEEEE"/>
                     </StackPanel>
                 </ListViewItem>
-                
+
                 <ListViewItem Height="60" Margin="0 0 0 0">
                     <StackPanel Orientation="Horizontal">
                         <Grid >
@@ -62,10 +65,12 @@
                         <TextBlock Text="PS. 4" VerticalAlignment="Center" FontSize="20" Foreground="#EEEEEE"/>
                     </StackPanel>
                 </ListViewItem>
-                
             </ListView>
         </Grid>
         
+        <Grid Margin="200 40 0 0">
+            <Grid x:Name="MainGrid"/>
+        </Grid>
         
         
     </Grid>

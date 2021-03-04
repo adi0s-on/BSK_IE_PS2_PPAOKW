@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BSK_PPAOKW.PS;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,7 @@ namespace BSK_PPAOKW
         public MainWindow()
         {
             InitializeComponent();
+            this.FontFamily = new FontFamily("Century Gothic");
         }
 
         private void ShutdownThisApp(object sender, RoutedEventArgs e)
@@ -38,5 +40,42 @@ namespace BSK_PPAOKW
             this.DragMove();
         }
 
+        private void ListViewMenu_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            int menuIndex = ListViewMenu.SelectedIndex;
+            MoveMenuCursor(menuIndex);
+
+            switch(menuIndex)
+            {
+                default:
+                    {
+                        MainGrid.Children.Clear();
+                        MainGrid.Children.Add(new WIP());
+                        break;
+
+                    }
+                case 0:
+                    {
+                        MainGrid.Children.Clear();
+                        MainGrid.Children.Add(new PS1());
+                        break;
+                    }
+            }
+        }
+
+        private void MoveMenuCursor(int menuIndex)
+        {
+            TransitionSlide.OnApplyTemplate();
+            MenuCursor.Margin = new Thickness(0, (50+(60*menuIndex)),0,0);
+        }
+
+        private void ListViewItem_Selected(object sender, RoutedEventArgs e)
+        {
+
+        }
+        private void ListViewItem_Selected_1(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
