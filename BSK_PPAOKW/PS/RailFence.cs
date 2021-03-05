@@ -8,6 +8,9 @@ namespace BSK_PPAOKW.PS
 {
     public class RailFence
     {
+        private char[] Word { get; set; }
+        private char[,] CryptingTable { get; set; }
+        private int N { get; set; }
         public RailFence(string word, int n)
         {
             Word = new char[word.Length];
@@ -18,9 +21,6 @@ namespace BSK_PPAOKW.PS
             CryptingTable = new char[n, Word.Length];
             N = n;
         }
-        private char[] Word { get; set; }
-        private char[,] CryptingTable { get; set; }
-        private int N { get; set; }
         public string Encrypt()
         {
             if(N <= 1)
@@ -57,20 +57,52 @@ namespace BSK_PPAOKW.PS
             {
                 return "Error! N must be higher than 1!";
             }
+            int letterNumber = 0;
+            for(int i = 0; i < N; i++)
+            {
+                if (i == 0 || i == N-1)
+                {
+                    for(int j = i; j<Word.Length; j+= 2*(N-1))
+                    {
+                        CryptingTable[i, j] = Word[letterNumber]; letterNumber++;
+                    }
+
+                }   
+                else
+                {
+                    bool even = false;
+                    for (int j = i; j < Word.Length;)
+                    {
+                        even = !even;
+                        CryptingTable[i, j] = Word[letterNumber]; letterNumber++;
+                        if (even)
+                        {
+                            j += 2 * (N - 1 - i);
+                        }
+                        else
+                        {
+                            j += 2 * i;
+                        }
+                    }
+                }
+            }
+
+            string decipheredWord = "";
             RailFenceCounter counter = new RailFenceCounter()
             {
                 MaxValue = N - 1,
                 Value = 0,
                 Direction = true,
             };
-
-            for (int i = 0; i < Word.Length; i++)
+            for (int j = 0; j<Word.Length; j++)
             {
-                CryptingTable[counter.Value,i ] = Word[i];
+                decipheredWord += CryptingTable[counter.Value, j];
                 counter.Tick();
             }
 
-            return "dupa";
+
+
+            return decipheredWord;
         }
 
         public class RailFenceCounter
@@ -107,5 +139,6 @@ namespace BSK_PPAOKW.PS
                 }
             }
         }
+
     }
 }

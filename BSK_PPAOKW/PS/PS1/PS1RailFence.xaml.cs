@@ -25,22 +25,45 @@ namespace BSK_PPAOKW.PS
             InitializeComponent();
         }
 
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
-
         private void Encrypt(object sender, RoutedEventArgs e)
         {
-            RailFence railFence = new RailFence(Encrypt_Text.Text.ToString(),Int32.Parse(Encrypt_N.Text.ToString()));
-            Encrypted_Result.Text = railFence.Encrypt();
-
+            string Text = Encrypt_Text.Text.ToString();
+            try
+            {
+                int N = Int32.Parse(Encrypt_N.Text.ToString()); 
+                if (Text != "")
+                {
+                    RailFence railFence = new RailFence(Text, N);
+                    Encrypted_Result.Text = railFence.Encrypt();
+                }
+                else Encrypt_Text.Text = "Please enter text in adjacent window.";
+            }
+            catch
+            {
+                if(Text != "") Encrypted_Result.Text = "N has to be a number!";
+                else Encrypted_Result.Text = "Please enter text in adjacent window\nN has to be a number!";
+            }
         }
 
         private void Decrypt(object sender, RoutedEventArgs e)
         {
-            RailFence railFence = new RailFence(Decrypt_Text.Text.ToString(),Int32.Parse(Decrypt_N.Text.ToString()));
-            Decrypted_Result.Text = railFence.Decrypt();
+            string Text = Decrypt_Text.Text.ToString();
+            try 
+            {
+                int N = Int32.Parse(Decrypt_N.Text.ToString()); 
+                if(Text != "")
+                {
+                    RailFence railFence = new RailFence(Text, N);
+                    Decrypted_Result.Text = railFence.Decrypt();
+                }
+                else Decrypted_Result.Text = "Please enter text in adjacent window.";
+            }
+            catch
+            {
+                if (Text != "") Decrypted_Result.Text = "N has to be a number!";
+                    else Decrypted_Result.Text = "Please enter text in adjacent window\nN has to be a number!";
+            }
+            
         }
     }
 }

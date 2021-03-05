@@ -24,10 +24,5 @@ namespace BSK_PPAOKW.PS
         {
             InitializeComponent();
         }
-
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
     }
 }
