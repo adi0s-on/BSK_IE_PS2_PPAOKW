@@ -29,5 +29,18 @@ namespace BSK_PPAOKW.PS
         {
 
         }
+
+        private void Encrypt(object sender, RoutedEventArgs e)
+        {
+            RailFence railFence = new RailFence(Encrypt_Text.Text.ToString(),Int32.Parse(Encrypt_N.Text.ToString()));
+            Encrypted_Result.Text = railFence.Encrypt();
+
+        }
+
+        private void Decrypt(object sender, RoutedEventArgs e)
+        {
+            RailFence railFence = new RailFence(Decrypt_Text.Text.ToString(),Int32.Parse(Decrypt_N.Text.ToString()));
+            Decrypted_Result.Text = railFence.Decrypt();
+        }
     }
 }

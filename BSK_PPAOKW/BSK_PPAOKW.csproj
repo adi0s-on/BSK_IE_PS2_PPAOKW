@@ -75,6 +75,7 @@
     <Compile Include="PS\PS1\PS1RailFence.xaml.cs">
       <DependentUpon>PS1RailFence.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PS\RailFence.cs" />
     <Compile Include="PS\WIP.xaml.cs">
       <DependentUpon>WIP.xaml</DependentUpon>
     </Compile>
