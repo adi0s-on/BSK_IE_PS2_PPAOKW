@@ -29,5 +29,12 @@ namespace BSK_PPAOKW.PS
         {
 
         }
+
+        private void Encrypt (object sender, RoutedEventArgs e)
+        {
+            MatrixConversion matrixConversion = new MatrixConversion(Encrypt_Text.Text.ToString(),Encrypt_Key.Text.ToString());
+            matrixConversion.Encrypt();
+
+        }
     }
 }

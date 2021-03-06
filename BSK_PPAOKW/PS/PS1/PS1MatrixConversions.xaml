@@ -18,14 +18,14 @@
 
 
             <TextBlock Width="270" Height="20"  VerticalAlignment="Top" HorizontalAlignment="Right" FontSize="15" Margin="0,88,320,0" Foreground="#393e46" Text="Enter text to encrypt"/>
-            <TextBox Width="270" Height="150" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,110,320,0" FontSize="14" ToolTip="Enter text to encrypt" BorderBrush="#393e46" BorderThickness="1 1 1 1" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" Background="#EEEEEE" AcceptsReturn="True"/>
+            <TextBox Name="Encrypt_Text" Width="270" Height="150" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,110,320,0" FontSize="14" ToolTip="Enter text to encrypt" BorderBrush="#393e46" BorderThickness="1 1 1 1" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" Background="#EEEEEE" AcceptsReturn="True"/>
 
             <TextBlock Width="135" Height="20"  VerticalAlignment="Top" HorizontalAlignment="Right" FontSize="15" Margin="0,270,455,0" Foreground="#393e46"><Run Text="Enter "/><Run Text="key"/></TextBlock>
-            <TextBox Width="175" Height="30" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,292,415,0" FontSize="14" ToolTip="Enter number N" BorderBrush="#393e46" BorderThickness="1 1 1 1" TextWrapping="Wrap" Background="#EEEEEE" MaxLength="10"/>
-            <Button Width="80" Height="30" VerticalAlignment="Top" HorizontalAlignment="Right" Background="#00adb5" BorderBrush="#393e46" Margin="0,292,320,0" Content="Encrypt" Foreground="#222831" Padding="0" FontSize="15" />
+            <TextBox Name="Encrypt_Key" Width="175" Height="30" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,292,415,0" FontSize="14" ToolTip="Enter number N" BorderBrush="#393e46" BorderThickness="1 1 1 1" TextWrapping="Wrap" Background="#EEEEEE" MaxLength="10"/>
+            <Button Width="80" Height="30" VerticalAlignment="Top" HorizontalAlignment="Right" Background="#00adb5" BorderBrush="#393e46" Margin="0,292,320,0" Content="Encrypt" Foreground="#222831" Padding="0" FontSize="15" Click="Encrypt"/>
 
-            <TextBlock Width="200" Height="20"  VerticalAlignment="Top" HorizontalAlignment="Right" FontSize="15" Margin="0,88,100,0" Foreground="#393e46" Text="Result"/>
-            <TextBox Width="280" Height="150" VerticalAlignment="Top" HorizontalAlignment="Right" ToolTip="Result" BorderBrush="#393e46" BorderThickness="1 1 1 1" Margin="0,110,20,0" IsReadOnly="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" TextChanged="TextBox_TextChanged" Background="#EEEEEE"/>
+            <TextBlock Width="200" Height="20" VerticalAlignment="Top" HorizontalAlignment="Right" FontSize="15" Margin="0,88,100,0" Foreground="#393e46" Text="Result"/>
+            <TextBox Name="Encrypted_Result" Width="280" Height="150" VerticalAlignment="Top" HorizontalAlignment="Right" ToolTip="Result" BorderBrush="#393e46" BorderThickness="1 1 1 1" Margin="0,110,20,0" IsReadOnly="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" TextChanged="TextBox_TextChanged" Background="#EEEEEE"/>
 
             <TextBlock Width="200" Height="20"  VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="15" Margin="120,525,0,0" Foreground="#393e46" Text="Result"/>
             <Button Width="80" Height="30" VerticalAlignment="Top" HorizontalAlignment="Right" Background="#00adb5" BorderBrush="#393e46" Margin="0,545,510,0" Content="Upload file" Foreground="#222831" Padding="0" FontSize="15"/>
