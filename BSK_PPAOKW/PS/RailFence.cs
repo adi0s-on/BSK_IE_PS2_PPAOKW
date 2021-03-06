@@ -97,6 +97,12 @@ namespace BSK_PPAOKW.PS
             return decipheredWord;
         }
 
+
+        public string EncryptFromFile()
+        {
+            return "xd";
+        }
+
         public class RailFenceCounter
         {
             public int Value { get; set; }

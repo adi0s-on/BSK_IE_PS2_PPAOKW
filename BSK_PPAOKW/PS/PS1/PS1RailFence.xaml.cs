@@ -20,6 +20,7 @@ namespace BSK_PPAOKW.PS
     /// </summary>
     public partial class PS1RailFence : UserControl
     {
+        public static string filepathRailFenceEncrypt = "", filepathRailFenceDecrypt = "";
         public PS1RailFence()
         {
             InitializeComponent();
@@ -36,7 +37,7 @@ namespace BSK_PPAOKW.PS
                     RailFence railFence = new RailFence(Text, N);
                     Encrypted_Result.Text = railFence.Encrypt();
                 }
-                else Encrypt_Text.Text = "Please enter text in adjacent window.";
+                else Encrypted_Result.Text = "Please enter text in adjacent window.";
             }
             catch
             {
@@ -64,6 +65,63 @@ namespace BSK_PPAOKW.PS
                     else Decrypted_Result.Text = "Please enter text in adjacent window\nN has to be a number!";
             }
             
+        }
+        private void Open_file_encrypt(object sender, RoutedEventArgs e)
+        {
+            Microsoft.Win32.OpenFileDialog openFileDialog = new Microsoft.Win32.OpenFileDialog();
+            bool? response = openFileDialog.ShowDialog();
+            if(response == true)
+            {
+                filepathRailFenceEncrypt = openFileDialog.FileName;
+                Encrypt_file_name_textblock.Text = filepathRailFenceEncrypt;
+            }
+        }
+        private void Open_file_decrypt(object sender, RoutedEventArgs e)
+        {
+            Microsoft.Win32.OpenFileDialog openFileDialog = new Microsoft.Win32.OpenFileDialog();
+            bool? response = openFileDialog.ShowDialog();
+            if (response == true)
+            {
+                filepathRailFenceDecrypt = openFileDialog.FileName;
+                Decrypt_file_name_textblock.Text = filepathRailFenceDecrypt;
+            }
+        }
+
+
+        private void Encrypt_from_file(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                int N = Int32.Parse(Encrypt_file_N.Text.ToString());
+                if (filepathRailFenceEncrypt != "")
+                {
+                    Encrypted_file_result.Text = "It works!";
+                }
+                else Encrypted_file_result.Text = "No file was given!";            
+            }
+            catch
+            {
+                if (filepathRailFenceEncrypt != "") Encrypted_file_result.Text = "N has to be a number!";
+                    else Encrypted_file_result.Text = "No file was given!\nN has to be a number!";
+            }
+        }
+
+        private void Decrypt_from_file(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                int N = Int32.Parse(Encrypt_file_N.Text.ToString());
+                if (filepathRailFenceDecrypt != "")
+                {
+                    Decrypted_file_result.Text = "It works!";
+                }
+                else Decrypted_file_result.Text = "No file was given!";
+            }
+            catch
+            {
+                if (filepathRailFenceDecrypt != "") Decrypted_file_result.Text = "N has to be a number!";
+                else Decrypted_file_result.Text = "No file was given!\nN has to be a number!";
+            }
         }
     }
 }
