@@ -24,16 +24,20 @@ namespace BSK_PPAOKW.PS
         {
             InitializeComponent();
         }
+<<<<<<< HEAD
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
         private void Encrypt (object sender, RoutedEventArgs e)
         {
             MatrixConversion matrixConversion = new MatrixConversion(Encrypt_Text.Text.ToString(),Encrypt_Key.Text.ToString());
-            Encrypted_Result.Text = matrixConversion.Encrypt();
-        }
+            matrixConversion.Encrypt();
 
-        private void Decrypt(object sender, RoutedEventArgs e)
-        {
-            MatrixConversion matrixConversion = new MatrixConversion(Decrypt_Text.Text.ToString(), Decrypt_Key.Text.ToString());
-            Decrypted_Result.Text = matrixConversion.Decrypt();
         }
+=======
+>>>>>>> 051394159be3d8e4e09b2f02b670e4adb3cec50a
     }
 }

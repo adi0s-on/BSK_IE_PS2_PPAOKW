@@ -23,10 +23,6 @@ namespace BSK_PPAOKW.PS
         }
         public string Encrypt()
         {
-            if(N <= 1)
-            {
-                return "Error! N must be higher than 1!";
-            }
             RailFenceCounter counter = new RailFenceCounter()
             {
                 MaxValue = N-1,
@@ -53,10 +49,6 @@ namespace BSK_PPAOKW.PS
         }
         public string Decrypt()
         {
-            if (N <= 1)
-            {
-                return "Error! N must be higher than 1!";
-            }
             int letterNumber = 0;
             for(int i = 0; i < N; i++)
             {

@@ -40,8 +40,8 @@ namespace BSK_PPAOKW.PS
             }
             catch
             {
-                if(Text != "") Encrypted_Result.Text = "N has to be a number!";
-                else Encrypted_Result.Text = "Please enter text in adjacent window\nN has to be a number!";
+                if(Text != "") Encrypted_Result.Text = "N has to be a number higher than 1!";
+                else Encrypted_Result.Text = "Please enter text in adjacent window\nN has to be a number higher than 1!";
             }
         }
 
