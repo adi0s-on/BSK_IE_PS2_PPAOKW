@@ -67,7 +67,6 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="PS\PS1\MatrixConversion.cs" />
-    <Compile Include="PS\PS1\MatrixConversionFromFile.cs" />
     <Compile Include="PS\PS1\PS1MatrixConversions.xaml.cs">
       <DependentUpon>PS1MatrixConversions.xaml</DependentUpon>
     </Compile>

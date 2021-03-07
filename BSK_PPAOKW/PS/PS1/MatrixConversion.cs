@@ -65,6 +65,24 @@ namespace BSK_PPAOKW.PS
 
         public string Decrypt()
         {
+            int[] KeySecond;
+            int lastLettersCount = Word.Length - (RowNumber * ColumnNumber - ColumnNumber);
+            KeySecond = new int[lastLettersCount];
+            bool isKeySecondNeeded = false;
+            if (Word.Length < RowNumber * ColumnNumber)
+            {
+                isKeySecondNeeded = true;
+                int counterForSecondKey = 0;
+                for (int i = 0; i < Key.Length; i++)
+                {
+                    if (Key[i] <= lastLettersCount)
+                    {
+                        KeySecond[counterForSecondKey] = Key[i];
+                        counterForSecondKey++;
+                    }
+                }
+
+            }
             int counter = 0;
             for (int i = 0; i < RowNumber; i++)
             {
@@ -72,37 +90,27 @@ namespace BSK_PPAOKW.PS
                 {
                     if (counter < Word.Length)
                     {
-                        MatrixTable[i, j] = Word[counter];
+                        if (i == RowNumber - 1 && isKeySecondNeeded)
+                        {
+                            MatrixTable[i, KeySecond[j] - 1] = Word[counter]; 
+                        }
+                        else
+                        {
+                            MatrixTable[i, Key[j]-1] = Word[counter];
+                        }
                         counter++;
                     }
                 }
             }
-
-            Array.Reverse(Key);
-
             string result = "";
-            int counterToRemove = 0;
             for (int i = 0; i < RowNumber; i++)
             {
-                for (int j = 0; j < Key.Length; j++)
+                for (int j = 0; j < ColumnNumber; j++)
                 {
-                    if(MatrixTable[i,Key[j]-1] != '\0')
-                    {
-                        result += MatrixTable[i, Key[j] - 1];
-                    }
-                    else
-                    {
-                        result += MatrixTable[i, Key[Key.Length - j] - 1];
-                        counterToRemove++;
-                    }
+                    result += MatrixTable[i, j];
                 }
             }
-            string result2 = "";
-            for (int i = 0; i < result.Length-counterToRemove; i++)
-            {
-                result2 += result[i];
-            }
-            return result2;
+            return result;
         }
     }
 }
