@@ -59,11 +59,25 @@ namespace BSK_PPAOKW.PS
 
         private void Encrypt_from_file(object sender, RoutedEventArgs e)
         {
-
+            List<string> WordsFromFile = System.IO.File.ReadAllLines(Encrypt_file_name_textblock.Text).ToList();
+            string result = "";
+            foreach (var word in WordsFromFile)
+            {
+                MatrixConversion matrixConversion = new MatrixConversion(word, Encrypt_file_key.Text.ToString());
+                result += matrixConversion.Encrypt() + "\n";
+            }
+            Encrypted_file_result.Text = result;
         }
         private void Decrypt_from_file(object sender, RoutedEventArgs e)
         {
-
+            //List<string> WordsFromFile = System.IO.File.ReadAllLines(Decrypt_file_name_textblock.Text).ToList();
+            //string result = "";
+            //foreach (var word in WordsFromFile)
+            //{
+            //    MatrixConversion matrixConversion = new MatrixConversion(word, Decrypt_file_key.Text.ToString());
+            //    result += matrixConversion.Decrypt() + "\n";
+            //}
+            //Decrypted_file_result.Text = result;
         }
     }
 }
