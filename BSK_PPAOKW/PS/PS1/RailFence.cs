@@ -91,16 +91,7 @@ namespace BSK_PPAOKW.PS
                 decipheredWord += CryptingTable[counter.Value, j];
                 counter.Tick();
             }
-
-
-
             return decipheredWord;
-        }
-
-
-        public string EncryptFromFile()
-        {
-            return "xd";
         }
 
         public class RailFenceCounter

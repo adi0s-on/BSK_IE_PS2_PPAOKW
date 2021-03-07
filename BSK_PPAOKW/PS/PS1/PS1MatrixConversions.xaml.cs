@@ -20,6 +20,7 @@ namespace BSK_PPAOKW.PS
     /// </summary>
     public partial class PS1MatrixConversions : UserControl
     {
+        public static string filepathRailFenceEncrypt = "", filepathRailFenceDecrypt = "";
         public PS1MatrixConversions()
         {
             InitializeComponent();
@@ -34,6 +35,26 @@ namespace BSK_PPAOKW.PS
         {
             MatrixConversion matrixConversion = new MatrixConversion(Decrypt_Text.Text.ToString(), Decrypt_Key.Text.ToString());
             Decrypted_Result.Text = matrixConversion.Decrypt();
+        }
+        private void Open_file_encrypt(object sender, RoutedEventArgs e)
+        {
+            Microsoft.Win32.OpenFileDialog openFileDialog = new Microsoft.Win32.OpenFileDialog();
+            bool? response = openFileDialog.ShowDialog();
+            if (response == true)
+            {
+                filepathRailFenceEncrypt = openFileDialog.FileName;
+                Encrypt_file_name_textblock.Text = filepathRailFenceEncrypt;
+            }
+        }
+        private void Open_file_decrypt(object sender, RoutedEventArgs e)
+        {
+            Microsoft.Win32.OpenFileDialog openFileDialog = new Microsoft.Win32.OpenFileDialog();
+            bool? response = openFileDialog.ShowDialog();
+            if (response == true)
+            {
+                filepathRailFenceDecrypt = openFileDialog.FileName;
+                Decrypt_file_name_textblock.Text = filepathRailFenceDecrypt;
+            }
         }
     }
 }

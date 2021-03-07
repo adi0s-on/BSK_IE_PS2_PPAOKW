@@ -36,8 +36,8 @@ namespace BSK_PPAOKW.PS
             }
             ColumnNumber = Key.Length;
             MatrixTable = new char[RowNumber,ColumnNumber];
-
         }
+
         public string Encrypt()
         {
             int counter = 0;
