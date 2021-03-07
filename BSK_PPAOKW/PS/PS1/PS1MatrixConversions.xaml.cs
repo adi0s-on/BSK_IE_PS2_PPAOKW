@@ -25,9 +25,9 @@ namespace BSK_PPAOKW.PS
         {
             InitializeComponent();
         }
-        private void Encrypt (object sender, RoutedEventArgs e)
+        private void Encrypt(object sender, RoutedEventArgs e)
         {
-            MatrixConversion matrixConversion = new MatrixConversion(Encrypt_Text.Text.ToString(),Encrypt_Key.Text.ToString());
+            MatrixConversion matrixConversion = new MatrixConversion(Encrypt_Text.Text.ToString(), Encrypt_Key.Text.ToString());
             Encrypted_Result.Text = matrixConversion.Encrypt();
         }
 
@@ -55,6 +55,15 @@ namespace BSK_PPAOKW.PS
                 filepathRailFenceDecrypt = openFileDialog.FileName;
                 Decrypt_file_name_textblock.Text = filepathRailFenceDecrypt;
             }
+        }
+
+        private void Encrypt_from_file(object sender, RoutedEventArgs e)
+        {
+
+        }
+        private void Decrypt_from_file(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
