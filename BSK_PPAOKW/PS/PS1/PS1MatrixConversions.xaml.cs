@@ -20,7 +20,6 @@ namespace BSK_PPAOKW.PS
     /// </summary>
     public partial class PS1MatrixConversions : UserControl
     {
-        public static string filepathRailFenceEncrypt = "", filepathRailFenceDecrypt = "";
         public PS1MatrixConversions()
         {
             InitializeComponent();
@@ -42,8 +41,7 @@ namespace BSK_PPAOKW.PS
             bool? response = openFileDialog.ShowDialog();
             if (response == true)
             {
-                filepathRailFenceEncrypt = openFileDialog.FileName;
-                Encrypt_file_name_textblock.Text = filepathRailFenceEncrypt;
+                Encrypt_file_name_textblock.Text = openFileDialog.FileName;
             }
         }
         private void Open_file_decrypt(object sender, RoutedEventArgs e)
@@ -52,21 +50,33 @@ namespace BSK_PPAOKW.PS
             bool? response = openFileDialog.ShowDialog();
             if (response == true)
             {
-                filepathRailFenceDecrypt = openFileDialog.FileName;
-                Decrypt_file_name_textblock.Text = filepathRailFenceDecrypt;
+                Decrypt_file_name_textblock.Text = openFileDialog.FileName;
             }
         }
 
         private void Encrypt_from_file(object sender, RoutedEventArgs e)
         {
-            List<string> WordsFromFile = System.IO.File.ReadAllLines(Encrypt_file_name_textblock.Text).ToList();
-            string result = "";
-            foreach (var word in WordsFromFile)
-            {
-                MatrixConversion matrixConversion = new MatrixConversion(word, Encrypt_file_key.Text.ToString());
-                result += matrixConversion.Encrypt() + "\n";
+            try
+            { 
+                if (Encrypt_file_name_textblock.Text != "")
+                {
+
+                    List<string> WordsFromFile = System.IO.File.ReadAllLines(Encrypt_file_name_textblock.Text).ToList();
+                    string result = "";
+                    foreach (var word in WordsFromFile)
+                    {
+                        MatrixConversion matrixConversion = new MatrixConversion(word, Encrypt_file_key.Text.ToString());
+                        result += matrixConversion.Encrypt() + "\n";
+                    }
+                    Encrypted_file_result.Text = result;
+                }
+                else Encrypt_file_name_textblock.Text = "No file was given!";
+                
             }
-            Encrypted_file_result.Text = result;
+            catch
+            {
+                Encrypted_file_result.Text = Encrypt_file_key.Text;
+            }
         }
         private void Decrypt_from_file(object sender, RoutedEventArgs e)
         {
