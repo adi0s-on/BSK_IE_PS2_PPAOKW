@@ -21,7 +21,6 @@ namespace BSK_PPAOKW.PS
     /// </summary>
     public partial class PS1RailFence : UserControl
     {
-        public static string filepathRailFenceEncrypt = "", filepathRailFenceDecrypt = "";
         public PS1RailFence()
         {
             InitializeComponent();
@@ -73,8 +72,7 @@ namespace BSK_PPAOKW.PS
             bool? response = openFileDialog.ShowDialog();
             if(response == true)
             {
-                filepathRailFenceEncrypt = openFileDialog.FileName;
-                Encrypt_file_name_textblock.Text = filepathRailFenceEncrypt;
+                Encrypt_file_name_textblock.Text = openFileDialog.FileName;
             }
         }
         private void Open_file_decrypt(object sender, RoutedEventArgs e)
@@ -83,37 +81,36 @@ namespace BSK_PPAOKW.PS
             bool? response = openFileDialog.ShowDialog();
             if (response == true)
             {
-                filepathRailFenceDecrypt = openFileDialog.FileName;
-                Decrypt_file_name_textblock.Text = filepathRailFenceDecrypt;
+                Decrypt_file_name_textblock.Text = openFileDialog.FileName;
             }
         }
         private void Encrypt_from_file(object sender, RoutedEventArgs e)
         {
             try
             {
-                int N = Int32.Parse(Encrypt_file_N.Text.ToString());
-                if (filepathRailFenceEncrypt != "")
+                if (Int32.Parse(Encrypt_file_N.Text) <= 1) Encrypted_file_result.Text = "N has to be a number greater than 1!";
+                else
                 {
-                    //Background.Source = new BitmapImage(new Uri("BSK_PPAOKW/Assets/Grayout.png", UriKind.Relative)); 
-
-                    RailFenceFromFile railFenceFromFile = new RailFenceFromFile(filepathRailFenceEncrypt, N);
-                    Encrypted_file_result.Text = "";
-
-                    List<string> words = railFenceFromFile.EncryptFromFile();
-                    foreach(String word in words)
+                    int N = Int32.Parse(Encrypt_file_N.Text.ToString());
+                    if (Encrypt_file_name_textblock.Text != "")
                     {
-                        Encrypted_file_result.Text += word; Encrypted_file_result.Text += "\n";
-                    }
+                        List<string> WordsFromFile = System.IO.File.ReadAllLines(Encrypt_file_name_textblock.Text).ToList();
+                        string result = "";
+                        Encrypted_file_result.Text = "";
 
-                   // Background.Source = new BitmapImage(new Uri("BSK_PPAOKW/Assets/Whiteout.png", UriKind.Relative));
-                   //Progress_bar.Visibility = Visibility.Hidden;
+                        foreach (String word in WordsFromFile)
+                        {
+                            RailFence railFence = new RailFence(word, Int32.Parse(Encrypt_file_N.Text));
+                            result += railFence.Encrypt() + "\n";
+                        }
+                        Encrypted_file_result.Text = result;
+                    }
+                    else Encrypted_file_result.Text = "No file was given!";   
                 }
-                else Encrypted_file_result.Text = "No file was given!";   
             }
             catch
             {
-               // Progress_bar.Visibility = Visibility.Hidden;
-                if (filepathRailFenceEncrypt != "") Encrypted_file_result.Text = "N has to be a number!";
+                if (Encrypt_file_name_textblock.Text != "") Encrypted_file_result.Text = "N has to be a number!";
                     else Encrypted_file_result.Text = "No file was given!\nN has to be a number!";
             } 
         }
@@ -121,22 +118,29 @@ namespace BSK_PPAOKW.PS
         {
             try
             {
-                int N = Int32.Parse(Decrypt_file_N.Text.ToString());
-                if (filepathRailFenceDecrypt != "")
+                if (Int32.Parse(Decrypt_file_N.Text) <= 1) Decrypted_file_result.Text = "N has to be a number greater than 1!";
+                else
                 {
-                    RailFenceFromFile railFenceFromFile = new RailFenceFromFile(filepathRailFenceDecrypt, N);
-                    Decrypted_file_result.Text = "";
-                    List<string> words = railFenceFromFile.DecryptFromFile();
-                    foreach(String word in words)
+                    int N = Int32.Parse(Decrypt_file_N.Text.ToString());
+                    if (Decrypt_file_name_textblock.Text != "")
                     {
-                        Decrypted_file_result.Text += word; Decrypted_file_result.Text += "\n";
+                        List<string> WordsFromFile = System.IO.File.ReadAllLines(Decrypt_file_name_textblock.Text).ToList();
+                        string result = "";
+                        Decrypted_file_result.Text = "";
+
+                        foreach(String word in WordsFromFile)
+                        {
+                            RailFence railFence = new RailFence(word, Int32.Parse(Decrypt_file_N.Text));
+                            result += railFence.Decrypt() + "\n";
+                        }
+                        Decrypted_file_result.Text = result;
                     }
+                    else Decrypted_file_result.Text = "No file was given!";
                 }
-                else Decrypted_file_result.Text = "No file was given!";
             }
             catch
             {
-                if (filepathRailFenceDecrypt != "") Decrypted_file_result.Text = "N has to be a number!";
+                if (Decrypt_file_name_textblock.Text != "") Decrypted_file_result.Text = "N has to be a number!";
                 else Decrypted_file_result.Text = "No file was given!\nN has to be a number!";
             }
         }

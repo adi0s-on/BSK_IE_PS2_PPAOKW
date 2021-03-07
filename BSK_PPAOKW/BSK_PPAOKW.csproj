@@ -77,7 +77,6 @@
       <DependentUpon>PS1RailFence.xaml</DependentUpon>
     </Compile>
     <Compile Include="PS\PS1\RailFence.cs" />
-    <Compile Include="PS\PS1\RailFenceFromFile.cs" />
     <Compile Include="PS\WIP.xaml.cs">
       <DependentUpon>WIP.xaml</DependentUpon>
     </Compile>
@@ -154,9 +153,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Assets\Grayout.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="PS\PS1\Whiteout.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\MaterialDesignThemes.4.0.0\build\MaterialDesignThemes.targets" Condition="Exists('..\packages\MaterialDesignThemes.4.0.0\build\MaterialDesignThemes.targets')" />
