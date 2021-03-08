@@ -60,6 +60,12 @@ namespace BSK_PPAOKW
                         MainGrid.Children.Add(new PS1());
                         break;
                     }
+                case 1:
+                    {
+                        MainGrid.Children.Clear();
+                        MainGrid.Children.Add(new PS2());
+                        break;
+                    }
             }
         }
 

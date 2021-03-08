@@ -77,6 +77,21 @@
       <DependentUpon>PS1RailFence.xaml</DependentUpon>
     </Compile>
     <Compile Include="PS\PS1\RailFence.cs" />
+    <Compile Include="PS\PS2\PS2MatrixConversionPS2.xaml.cs">
+      <DependentUpon>PS2MatrixConversionPS2.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PS\PS2\PS2VigenereCipher.xaml.cs">
+      <DependentUpon>PS2VigenereCipher.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PS\PS2\PS2CaesarsCipher.xaml.cs">
+      <DependentUpon>PS2CaesarsCipher.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PS\PS2\CaesarsCipher.cs" />
+    <Compile Include="PS\PS2\MatrixConversionPS2.cs" />
+    <Compile Include="PS\PS2\PS2.xaml.cs">
+      <DependentUpon>PS2.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PS\PS2\VigenereCipher.cs" />
     <Compile Include="PS\WIP.xaml.cs">
       <DependentUpon>WIP.xaml</DependentUpon>
     </Compile>
@@ -101,6 +116,22 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="PS\PS1\PS1RailFence.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PS\PS2\PS2MatrixConversionPS2.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PS\PS2\PS2VigenereCipher.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PS\PS2\PS2CaesarsCipher.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PS\PS2\PS2.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
