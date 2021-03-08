@@ -26,13 +26,13 @@ namespace BSK_PPAOKW.PS
         }
         private void Encrypt(object sender, RoutedEventArgs e)
         {
-            MatrixConversion matrixConversion = new MatrixConversion(Encrypt_Text.Text.ToString(), Encrypt_Key.Text.ToString());
+            MatrixConversion matrixConversion = new MatrixConversion(Encrypt_Text.Text.ToString(), Encrypt_Key.Text.ToString(),true);
             Encrypted_Result.Text = matrixConversion.Encrypt();
         }
 
         private void Decrypt(object sender, RoutedEventArgs e)
         {
-            MatrixConversion matrixConversion = new MatrixConversion(Decrypt_Text.Text.ToString(), Decrypt_Key.Text.ToString());
+            MatrixConversion matrixConversion = new MatrixConversion(Decrypt_Text.Text.ToString(), Decrypt_Key.Text.ToString(),false);
             Decrypted_Result.Text = matrixConversion.Decrypt();
         }
         private void Open_file_encrypt(object sender, RoutedEventArgs e)
@@ -65,7 +65,7 @@ namespace BSK_PPAOKW.PS
                     string result = "";
                     foreach (var word in WordsFromFile)
                     {
-                        MatrixConversion matrixConversion = new MatrixConversion(word, Encrypt_file_key.Text.ToString());
+                        MatrixConversion matrixConversion = new MatrixConversion(word, Encrypt_file_key.Text.ToString(),true);
                         result += matrixConversion.Encrypt() + "\n";
                     }
                     Encrypted_file_result.Text = result;
@@ -80,14 +80,21 @@ namespace BSK_PPAOKW.PS
         }
         private void Decrypt_from_file(object sender, RoutedEventArgs e)
         {
-            //List<string> WordsFromFile = System.IO.File.ReadAllLines(Decrypt_file_name_textblock.Text).ToList();
-            //string result = "";
-            //foreach (var word in WordsFromFile)
-            //{
-            //    MatrixConversion matrixConversion = new MatrixConversion(word, Decrypt_file_key.Text.ToString());
-            //    result += matrixConversion.Decrypt() + "\n";
-            //}
-            //Decrypted_file_result.Text = result;
+            try
+            {
+                List<string> WordsFromFile = System.IO.File.ReadAllLines(Decrypt_file_name_textblock.Text).ToList();
+                string result = "";
+                foreach (var word in WordsFromFile)
+                {
+                    MatrixConversion matrixConversion = new MatrixConversion(word, Decrypt_file_key.Text.ToString(),false);
+                    result += matrixConversion.Decrypt() + "\n";
+                }
+                Decrypted_file_result.Text = result;
+            }
+            catch
+            {
+                Decrypted_file_result.Text = Decrypt_file_key.Text;
+            }
         }
     }
 }
