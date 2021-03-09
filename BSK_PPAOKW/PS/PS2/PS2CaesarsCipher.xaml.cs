@@ -30,7 +30,7 @@ namespace BSK_PPAOKW.PS
             string Text = Encrypt_Text.Text.ToString();
             try
             {
-                int N = (Int32.Parse(Encrypt_N.Text.ToString()) % 26);
+                int N = (Int32.Parse(Text) % 26);
                 if (Text != "")
                 {
                     Encrypted_Result.Text = Encrypt_word(Text, N);
@@ -50,7 +50,7 @@ namespace BSK_PPAOKW.PS
             string Text = Decrypt_Text.Text.ToString();
             try
             {
-                int N = (Int32.Parse(Decrypt_N.Text.ToString()) % 26);
+                int N = (Int32.Parse(Text) % 26);
                 if (Text != "")
                 {
                     Decrypted_Result.Text = Encrypt_word(Text, 26 - N);
@@ -147,12 +147,12 @@ namespace BSK_PPAOKW.PS
         {
             if (!char.IsLetter(x)) return x;
 
-            char offser = 'a';
-            if (char.IsUpper(x)) offser = 'A';
-            return (char)((((x + key) - offser) % 26) + offser);
+            char begin = 'a';
+            if (char.IsUpper(x)) begin = 'A';
+            return (char)(((x + key - begin) % 26) + begin);
         }
 
-        public string Encrypt_word(string word, int key)
+        private string Encrypt_word(string word, int key)
         {
             string encryptedWord = "";
             foreach (char x in word)

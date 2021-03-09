@@ -3,6 +3,7 @@ Table
 Furniture
 Code
 Carpet
+Dix
 Window
 Wall
 Garden
@@ -53,7 +54,6 @@ Disney
 Disneyland
 Disraeli
 Diwali
-Dix
 Cordelia
 Cordilleras
 Cordoba
