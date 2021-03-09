@@ -27,7 +27,8 @@ namespace BSK_PPAOKW.PS
 
         private void Encrypt(object sender, RoutedEventArgs e)
         {
-
+            MatrixConversionPS2 matrixConversionPS2 = new MatrixConversionPS2(Encrypt_Text.Text.ToString(),Encrypt_Key.Text.ToString());
+            Encrypted_Result.Text = matrixConversionPS2.Encrypt();
         }
 
         private void Decrypt(object sender, RoutedEventArgs e)
