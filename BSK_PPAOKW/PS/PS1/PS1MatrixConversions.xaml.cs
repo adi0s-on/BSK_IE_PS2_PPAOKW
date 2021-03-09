@@ -26,14 +26,25 @@ namespace BSK_PPAOKW.PS
         }
         private void Encrypt(object sender, RoutedEventArgs e)
         {
-            MatrixConversion matrixConversion = new MatrixConversion(Encrypt_Text.Text.ToString(), Encrypt_Key.Text.ToString(),true);
-            Encrypted_Result.Text = matrixConversion.Encrypt();
+            if (Encrypt_Text.Text != "")
+            {
+                MatrixConversion matrixConversion = new MatrixConversion(Encrypt_Text.Text.ToString(), Encrypt_Key.Text.ToString(), true);
+                Encrypted_Result.Text = matrixConversion.Encrypt();
+            }
+            else if (Encrypt_Key.Text == "") Encrypted_Result.Text = "Please enter text and key in adjacent windows";
+            else Encrypted_Result.Text = "Please enter text in adjacent window";
         }
 
         private void Decrypt(object sender, RoutedEventArgs e)
         {
-            MatrixConversion matrixConversion = new MatrixConversion(Decrypt_Text.Text.ToString(), Decrypt_Key.Text.ToString(),false);
-            Decrypted_Result.Text = matrixConversion.Decrypt();
+            if (Decrypt_Text.Text != "")
+            {
+                MatrixConversion matrixConversion = new MatrixConversion(Decrypt_Text.Text.ToString(), Decrypt_Key.Text.ToString(), false);
+                Decrypted_Result.Text = matrixConversion.Decrypt();
+            }
+            else if (Decrypt_Key.Text == "") Decrypted_Result.Text = "Please enter text and key in adjacent windows";
+            else Decrypted_Result.Text = "Please enter text in adjacent window";
+
         }
         private void Open_file_encrypt(object sender, RoutedEventArgs e)
         {
@@ -70,8 +81,12 @@ namespace BSK_PPAOKW.PS
                     }
                     Encrypted_file_result.Text = result;
                 }
-                else Encrypt_file_name_textblock.Text = "No file was given!";
-                
+                else if (Encrypt_file_key.Text == "")
+                {
+                    Encrypted_file_result.Text = "No file was given!\nPlease enter key.";
+                }
+                else Encrypted_file_result.Text = "No file was given!";
+
             }
             catch
             {
@@ -82,14 +97,22 @@ namespace BSK_PPAOKW.PS
         {
             try
             {
-                List<string> WordsFromFile = System.IO.File.ReadAllLines(Decrypt_file_name_textblock.Text).ToList();
-                string result = "";
-                foreach (var word in WordsFromFile)
+                if (Decrypt_file_name_textblock.Text != "")
                 {
-                    MatrixConversion matrixConversion = new MatrixConversion(word, Decrypt_file_key.Text.ToString(),false);
-                    result += matrixConversion.Decrypt() + "\n";
+                    List<string> WordsFromFile = System.IO.File.ReadAllLines(Decrypt_file_name_textblock.Text).ToList();
+                    string result = "";
+                    foreach (var word in WordsFromFile)
+                    {
+                        MatrixConversion matrixConversion = new MatrixConversion(word, Decrypt_file_key.Text.ToString(), false);
+                        result += matrixConversion.Decrypt() + "\n";
+                    }
+                    Decrypted_file_result.Text = result;
                 }
-                Decrypted_file_result.Text = result;
+                else if (Decrypt_file_key.Text == "")
+                {
+                    Decrypted_file_result.Text = "No file was given!\nPlease enter key.";
+                }
+                else Decrypted_file_result.Text = "No file was given!";
             }
             catch
             {

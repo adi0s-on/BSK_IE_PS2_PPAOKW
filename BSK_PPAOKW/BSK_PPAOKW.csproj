@@ -86,7 +86,6 @@
     <Compile Include="PS\PS2\PS2CaesarsCipher.xaml.cs">
       <DependentUpon>PS2CaesarsCipher.xaml</DependentUpon>
     </Compile>
-    <Compile Include="PS\PS2\CaesarsCipher.cs" />
     <Compile Include="PS\PS2\MatrixConversionPS2.cs" />
     <Compile Include="PS\PS2\PS2.xaml.cs">
       <DependentUpon>PS2.xaml</DependentUpon>
