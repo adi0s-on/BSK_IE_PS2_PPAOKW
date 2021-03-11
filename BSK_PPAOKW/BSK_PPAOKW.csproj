@@ -66,6 +66,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="PS\FileOpen.cs" />
     <Compile Include="PS\PS1\MatrixConversion.cs" />
     <Compile Include="PS\PS1\PS1MatrixConversions.xaml.cs">
       <DependentUpon>PS1MatrixConversions.xaml</DependentUpon>
@@ -90,7 +91,6 @@
     <Compile Include="PS\PS2\PS2.xaml.cs">
       <DependentUpon>PS2.xaml</DependentUpon>
     </Compile>
-    <Compile Include="PS\PS2\VigenereCipher.cs" />
     <Compile Include="PS\WIP.xaml.cs">
       <DependentUpon>WIP.xaml</DependentUpon>
     </Compile>

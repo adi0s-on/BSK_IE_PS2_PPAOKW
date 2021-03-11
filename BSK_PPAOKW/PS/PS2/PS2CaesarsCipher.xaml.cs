@@ -1,17 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace BSK_PPAOKW.PS
 {
@@ -30,7 +21,7 @@ namespace BSK_PPAOKW.PS
             string Text = Encrypt_Text.Text.ToString();
             try
             {
-                int N = (Int32.Parse(Text) % 26);
+                int N = (Int32.Parse(Encrypt_N.Text.ToString()) % 26);
                 if (Text != "")
                 {
                     Encrypted_Result.Text = Encrypt_word(Text, N);
@@ -66,21 +57,11 @@ namespace BSK_PPAOKW.PS
 
         private void Open_file_encrypt(object sender, RoutedEventArgs e)
         {
-            Microsoft.Win32.OpenFileDialog openFileDialog = new Microsoft.Win32.OpenFileDialog();
-            bool? response = openFileDialog.ShowDialog();
-            if (response == true)
-            {
-                Encrypt_file_name_textblock.Text = openFileDialog.FileName;
-            }
+            FileOpen.Open_file(Encrypt_file_name_textblock);
         }
         private void Open_file_decrypt(object sender, RoutedEventArgs e)
         {
-            Microsoft.Win32.OpenFileDialog openFileDialog = new Microsoft.Win32.OpenFileDialog();
-            bool? response = openFileDialog.ShowDialog();
-            if (response == true)
-            {
-                Decrypt_file_name_textblock.Text = openFileDialog.FileName;
-            }
+            FileOpen.Open_file(Decrypt_file_name_textblock);
         }
 
         private void Encrypt_from_file(object sender, RoutedEventArgs e)
@@ -145,11 +126,16 @@ namespace BSK_PPAOKW.PS
 
         private char Crypter(char x, int key)
         {
-            if (!char.IsLetter(x)) return x;
+            if (!char.IsLetter(x))
+            {
+                return x;
+            }
 
             char begin = 'a';
             if (char.IsUpper(x)) begin = 'A';
-            return (char)(((x + key - begin) % 26) + begin);
+            {
+                return (char)(((x + key - begin) % 26) + begin);
+            }
         }
 
         private string Encrypt_word(string word, int key)
