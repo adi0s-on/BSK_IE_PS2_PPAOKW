@@ -41,7 +41,7 @@ namespace BSK_PPAOKW.PS
             string Text = Decrypt_Text.Text.ToString();
             try
             {
-                int N = (Int32.Parse(Text) % 26);
+                int N = (Int32.Parse(Decrypt_N.Text.ToString()) % 26);
                 if (Text != "")
                 {
                     Decrypted_Result.Text = Encrypt_word(Text, 26 - N);
