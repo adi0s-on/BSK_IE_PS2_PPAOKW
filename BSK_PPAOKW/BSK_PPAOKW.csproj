@@ -91,6 +91,15 @@
     <Compile Include="PS\PS2\PS2.xaml.cs">
       <DependentUpon>PS2.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PS\PS3\PS3PseudorandomNumber.xaml.cs">
+      <DependentUpon>PS3PseudorandomNumber.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PS\PS3\PS3StreamCipher.xaml.cs">
+      <DependentUpon>PS3StreamCipher.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PS\PS3\PS3.xaml.cs">
+      <DependentUpon>PS3.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PS\WIP.xaml.cs">
       <DependentUpon>WIP.xaml</DependentUpon>
     </Compile>
@@ -131,6 +140,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="PS\PS2\PS2.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PS\PS3\PS3PseudorandomNumber.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PS\PS3\PS3StreamCipher.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PS\PS3\PS3.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -184,6 +205,7 @@
   <ItemGroup>
     <Resource Include="Assets\Grayout.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\MaterialDesignThemes.4.0.0\build\MaterialDesignThemes.targets" Condition="Exists('..\packages\MaterialDesignThemes.4.0.0\build\MaterialDesignThemes.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
