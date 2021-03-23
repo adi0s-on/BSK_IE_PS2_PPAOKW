@@ -13,10 +13,25 @@
         <Grid Width="610" HorizontalAlignment="Left">
             <TextBlock Width="110" Height="40" Text="Encrypt" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0 20 0 0" FontSize="26" TextAlignment="Left" Foreground="#222831"/>
             <TextBlock Width="270" Height="20"  VerticalAlignment="Top" HorizontalAlignment="Right" FontSize="15" Margin="0,88,320,0" Foreground="#393e46" Text="Choose file to encrypt"/>
-            <Button Width="180" Height="30" VerticalAlignment="Top" HorizontalAlignment="Left" Background="#00adb5" BorderBrush="#393e46" Margin="20,113,0,0" Content="Open file" Foreground="#222831" Padding="0" FontSize="15"/>
-            <Button Height="30" VerticalAlignment="Top" Background="#00adb5" BorderBrush="#393e46" Margin="0,148,410,0" Content="Encrypt" Foreground="#222831" Padding="0" FontSize="15" HorizontalAlignment="Right" Width="180"/>
+            <Button Name="Create" Click="Create_Click" Width="180" Height="30" VerticalAlignment="Top" HorizontalAlignment="Left" Background="#00adb5" BorderBrush="#393e46" Margin="20,113,0,0" Content="Read polynomial" Foreground="#222831" Padding="0" FontSize="15"/>
+            <Button Name ="Start" Click="Start_Click" Height="30" VerticalAlignment="Top" Background="#00adb5" BorderBrush="#393e46" Margin="0,148,410,0" Content="Start" Foreground="#222831" Padding="0" FontSize="15" HorizontalAlignment="Right" Width="180"/>
+            <Button Name ="Stop" Click="Stop_Click" Height="30" VerticalAlignment="Top" Background="#00adb5" BorderBrush="#393e46" Margin="0,183,410,0" Content="Stop" Foreground="#222831" Padding="0" FontSize="15" HorizontalAlignment="Right" Width="180"/>
+            <TextBlock Width="135" Height="20" Text="Enter polynomial" VerticalAlignment="Top" HorizontalAlignment="Right" FontSize="15" Margin="0,113,250,0" Foreground="#393e46"/>
+            <TextBox Name ="Polynomial" Width="180" Height="30" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,138,205,0" FontSize="14" BorderBrush="#393e46" BorderThickness="1 1 1 1" TextWrapping="Wrap" Background="#EEEEEE" MaxLength="20"/>
+            <TextBox Name ="Result" Width="551" Height="116" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,271,39,0" FontSize="14" BorderBrush="#393e46" BorderThickness="1 1 1 1" TextWrapping="Wrap" Background="#EEEEEE"/>
+            <TextBlock Name="ErrorTextBlock" Width="323" Height="20" Text="" Foreground="Red" VerticalAlignment="Top" HorizontalAlignment="Right" FontSize="15" Margin="0,191,62,0" RenderTransformOrigin="0.5,0.5" >
+                <TextBlock.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="-0.171"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </TextBlock.RenderTransform>
+            </TextBlock>
+            <!--<TextBlock Text="Polynomial" Margin="220,113,-220,-113"></TextBlock>-->
             <TextBlock Height="20"  VerticalAlignment="Top" FontSize="15" Margin="0,246,390,0" Foreground="#393e46" Text="Result" HorizontalAlignment="Right" Width="200"/>
-            <TextBlock Width="192" Height="70" Name="Encrypt_file_name_textblock" VerticalAlignment="Top" HorizontalAlignment="Right" Text="" FontSize="11" Margin="0,108,168,0" Foreground="#393e46" TextWrapping="Wrap"/>
+            <!--<TextBlock Width="192" Height="70" Name="Encrypt_file_name_textblock" VerticalAlignment="Top" HorizontalAlignment="Right" Text="" FontSize="11" Margin="0,108,168,0" Foreground="#393e46" TextWrapping="Wrap"/>-->
             <ProgressBar HorizontalAlignment="Left" Height="28" Margin="208,392,0,0" VerticalAlignment="Top" Width="152"/>
 
         </Grid>

@@ -91,6 +91,7 @@
     <Compile Include="PS\PS2\PS2.xaml.cs">
       <DependentUpon>PS2.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PS\PS3\Lfsr.cs" />
     <Compile Include="PS\PS3\PS3PseudorandomNumber.xaml.cs">
       <DependentUpon>PS3PseudorandomNumber.xaml</DependentUpon>
     </Compile>
