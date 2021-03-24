@@ -8,62 +8,84 @@ namespace BSK_PPAOKW.PS
 {
     public class Lfsr
     {
-        public List<bool[]> TableXOR { get; set; }
         public int RowLength { get; set; }
-        public List<bool> Result { get; set; }
         public int[] Key { get; set; }
-
+        public bool[] UpperArray { get; set; }
+        public bool[] LowerArray { get; set; }
+        public bool  FirstTime { get; set; }
         public bool IsStopped { get; set; }
 
         public Lfsr(int rowLength)
         {
             RowLength = rowLength;
-            TableXOR = new List<bool[]>();
-            Result = new List<bool>();
+            FirstTime = true;
+            UpperArray = new bool[rowLength];
+            LowerArray = new bool[rowLength];
         }
 
         public bool AddRow()
         {
-            if (TableXOR.Count == 0)
+            if (FirstTime)
             {
-                bool[] row = new bool[RowLength];
+                int howManyTimesFalse = 0, howManyTimesTrue = 0; 
+                //first line has to be random
                 for (int i = 0; i < RowLength; i++)
                 {
                     Random random = new Random();
-                    int q = random.Next(0, 2);
-                    if (q == 0)
+                    if (random.Next(0, 2) == 0)
                     {
-                        row[i] = false;
+                        UpperArray[i] = false; howManyTimesFalse++;
                     }
                     else
                     {
-                        row[i] = true;
+                        UpperArray[i] = true; howManyTimesTrue++;
                     }
                 }
-                TableXOR.Add(row);
-                bool xor = OperationXOR(row);
-                Result.Add(xor);
-                return xor;
-                
+                if(howManyTimesFalse == RowLength)
+                {
+                    UpperArray[RowLength - 1] = true;
+                }
+                else if (howManyTimesTrue == RowLength)
+                {
+                    UpperArray[RowLength - 1] = false;
+                }
+
+                //XOR first and last | Q1 and Qk
+                bool XORResult = OperationXOR(UpperArray);
+
+                LowerArray[0] = XORResult;  
+                for (int i = 1; i < LowerArray.Length; i++)
+                {
+                    LowerArray[i] = UpperArray[i - 1];
+                }
+                FirstTime = false;
+
+                return XORResult;
+
             }
+
             else
             {
-                bool[] row = new bool[RowLength];
-                row[0] = Result.LastOrDefault();
-                for (int i = 1; i < RowLength; i++)
+                for (int i = 0; i < UpperArray.Length; i++)
                 {
-                    row[i] = TableXOR.LastOrDefault()[i];
+                    UpperArray[i] = LowerArray[i];
                 }
-                TableXOR.Add(row);
-                bool xor = OperationXOR(row);
-                Result.Add(xor);
-                return xor;
+
+                bool XORResult = OperationXOR(UpperArray);
+                LowerArray[0] = XORResult;
+
+                for (int i = 1; i < LowerArray.Length; i++)
+                {
+                    LowerArray[i] = UpperArray[i - 1];
+                }
+
+                return XORResult;
             }
         }
 
         private bool OperationXOR(bool[] row)
         {
-            if (row[0] != row[RowLength-1])
+            if (row[0] != row[row.Length-1])
             {
                 return true;
             }

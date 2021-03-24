@@ -12,7 +12,7 @@
 
         <Grid Width="1240" Height="40" VerticalAlignment="Top" Background="#d6d6d6">
             <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Height="40">
-                <Button Uid="0" Width="620" Height="40" HorizontalAlignment="Left" Background="{x:Null}" BorderBrush="{x:Null}" Content="Pseudorandom number generator method" Foreground="#222831" FontSize="21" Padding="0" Click="PS3ButtonClick"/>
+                <Button Uid="0" Width="620" Height="40" HorizontalAlignment="Left" Background="{x:Null}" BorderBrush="{x:Null}" Content="Pseudorandom number generator" Foreground="#222831" FontSize="21" Padding="0" Click="PS3ButtonClick"/>
                 <Button Uid="1" Width="620" Height="40" HorizontalAlignment="Right" Background="{x:Null}" BorderBrush="{x:Null}" Content="Stream cipher method" Foreground="#222831" FontSize="21" Padding="0" Click="PS3ButtonClick"/>
             </StackPanel>
             <Grid x:Name="TopMenuCursorPS3" Width="620" Height="5" HorizontalAlignment="Left" Margin="0,35,0,111" Background="#00adb5"/>
