@@ -14,6 +14,7 @@ namespace BSK_PPAOKW.PS
     public partial class PS3PseudorandomNumber : UserControl
     {
         public string resultStringMaxTwentyChars = "";
+
         public Lfsr LfsrMethod { get; set; }
         public PS3PseudorandomNumber()
         {
@@ -30,11 +31,10 @@ namespace BSK_PPAOKW.PS
 
         private void Start_Click(object sender, RoutedEventArgs e)
         {
-
-
             string polynomial = Polynomial.Text.ToString();
-            int[] Powers = new int[polynomial.Length / 2];
+            int[] Powers = new int[polynomial.Length];
             int counter = 0;
+          
             if(LfsrMethod == null)
             {
                 try
@@ -43,7 +43,16 @@ namespace BSK_PPAOKW.PS
                     {
                         if (polynomial[i] == '^')
                         {
-                            Powers[counter] = (Int32.Parse(polynomial[i + 1].ToString()));
+                            int counter2 = 0;
+                            while (Int32.TryParse(polynomial[i + 1 + counter2].ToString(), out int nothing))
+                            {
+                                Powers[counter] = Int32.Parse(Powers[counter].ToString() + polynomial[i + 1 + counter2].ToString());
+                                counter2++;
+                                if (i + 1 + counter2 == polynomial.Length)
+                                {
+                                    break;
+                                }
+                            }
                             counter++;
                         }
                     }
