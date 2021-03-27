@@ -57,7 +57,7 @@ namespace BSK_PPAOKW.PS
 
         private void Open_file_encrypt(object sender, RoutedEventArgs e)
         {
-            FileOpen.Open_file(Encrypt_file_name_textblock);
+            FileOpen.Open_file(Encrypt_file_name_textblock); 
         }
         private void Open_file_decrypt(object sender, RoutedEventArgs e)
         {

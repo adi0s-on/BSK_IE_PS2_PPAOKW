@@ -30,7 +30,7 @@
             </materialDesign:TransitioningContent>
 
             <ListView x:Name="ListViewMenu" Margin="0 50" SelectionChanged="ListViewMenu_SelectionChanged">
-                <ListViewItem Height="60" Margin="0 0 0 0" Selected="ListViewItem_Selected_1">
+                <ListViewItem Height="60" Margin="0 0 0 0">
                     <StackPanel Orientation="Horizontal">
                         <Grid >
                             <materialDesign:PackIcon Kind="Filter1" Height="35" Width="35" HorizontalAlignment="Center" Margin="10 0 10 0" Foreground="#eeeeee"/>
@@ -39,7 +39,7 @@
                     </StackPanel>
                 </ListViewItem>
                 
-                <ListViewItem Height="60" Margin="0 0 0 0" Selected="ListViewItem_Selected">
+                <ListViewItem Height="60" Margin="0 0 0 0">
                     <StackPanel Orientation="Horizontal">
                         <Grid >
                             <materialDesign:PackIcon Kind="Filter2" Height="35" Width="35" HorizontalAlignment="Center" Margin="10 0 10 0" Foreground="#eeeeee"/>

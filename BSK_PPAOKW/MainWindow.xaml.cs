@@ -71,13 +71,6 @@ namespace BSK_PPAOKW
             MenuCursor.Margin = new Thickness(0, (50+(60*menuIndex)),0,0);
         }
 
-        private void ListViewItem_Selected(object sender, RoutedEventArgs e)
-        {
 
-        }
-        private void ListViewItem_Selected_1(object sender, RoutedEventArgs e)
-        {
-
-        }
     }
 }
