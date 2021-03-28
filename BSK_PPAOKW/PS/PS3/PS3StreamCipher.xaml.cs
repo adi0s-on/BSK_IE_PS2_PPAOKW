@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -25,6 +27,10 @@ namespace BSK_PPAOKW.PS
         public Lfsr LfsrMethod_Decrypt { get; set; }
         public string keyEncryption = "";
         public string keyDecryption = "";
+        public string filePathEncrypt = "";
+        public string filePathDecrypt = "";
+        public string fileExtension = "";
+
         public PS3StreamCipher()
         {
             InitializeComponent();
@@ -119,6 +125,8 @@ namespace BSK_PPAOKW.PS
             if(LfsrMethod_Encrypt != null)
             {
                 LfsrMethod_Encrypt.IsStopped = false;
+                filePathEncrypt = Encrypt_file_name_textblock.Text;
+                fileExtension = filePathEncrypt.Substring(filePathEncrypt.Length - 4);
                 new Thread(GenerateKeyForEncrypter).Start();
                 Encrypt_button.IsEnabled = false;
                 Encrypt_button.Background = Brushes.Gray;
@@ -176,42 +184,104 @@ namespace BSK_PPAOKW.PS
 
         public void GenerateKeyForEncrypter()
         {
-
+            byte[] bytesFromFileEncrypt = System.IO.File.ReadAllBytes(filePathEncrypt);
+            BitArray bits = new BitArray(bytesFromFileEncrypt);
+            bool[] emptyByteArray = new bool[bits.Length];
             try
             {
-                while (!LfsrMethod_Encrypt.IsStopped)
+                //FIXME to trzeba naprawic  
+                int count = 0;
+                while (count < bits.Length)
                 {
                     this.Dispatcher.Invoke(() =>
                     {
                         bool row = LfsrMethod_Encrypt.AddRow();
-                        string toAdd = "";
-
-                        if (row)
+                        bool toAdd = false; 
+                        if (row != bits[count])
                         {
-                            toAdd = "1";
+                            toAdd = true;
                         }
-                        else
-                        {
-                            toAdd = "0";
-                        }
-
-                        if (keyEncryption.Length >= 11)
-                        {
-                            keyEncryption = keyEncryption.Substring(1);
-                            keyEncryption += toAdd;
-                        }
-                        else keyEncryption += toAdd;
-
-                        Key_Encrypt.Text = keyEncryption;
+                        emptyByteArray[count] = toAdd;
+                        count++;
                     });
+                }
+                byte[] xd = new byte[emptyByteArray.Length];
+                BitArray bitsToReturn = new BitArray(emptyByteArray);
 
-                    Thread.Sleep(120);
+                bitsToReturn.CopyTo(xd, 0);
+                SaveFileDialog sfd = new SaveFileDialog();
+                switch(fileExtension)
+                {
+                    case ".mp3":
+                    {
+                            sfd.Filter = "MP3 file|*.mp3";
+                            sfd.Title = "Save an encrypted MP3 file";
+                            break;
+                    }
+                    case ".jpg":
+                    {
+                            sfd.Filter = "JPeg Image|*.jpg";
+                            sfd.Title = "Save an encrypted image file";
+                            break;
+                    }
+                    case ".txt":
+                    {
+                            sfd.Filter = "Txt file|*.txt";
+                            sfd.Title = "Save an encrypted text file";
+                            break;
+                    }
+                    default:
+                    {
+                        break;
+                    }
+                }
+
+
+                /*
+                 
+                                 //    c => Convert.ToString(Convert.ToInt32(c.ToString(), 16), 2).PadLeft(4, '0')
+                int count = 0;
+                while (count < bytesFromFileEncrypt.Length)
+                {
+
+                    this.Dispatcher.Invoke(() =>
+                    {
+                        string convertedByteToBinary = Convert.ToString(Convert.ToInt32(bytesFromFileEncrypt[count].ToString(), 16), 2).PadLeft(4, '0');
+                        for (int i = 0; i < convertedByteToBinary.Length; i++)
+                        {   
+                            bool row = LfsrMethod_Encrypt.AddRow();
+                            if (Convert.ToBoolean(convertedByteToBinary[i]) != row)
+                            {
+
+                            }
+                        }
+                        
+                        byte toAdd = 0;
+                        if (row != bits[count])
+                        {
+                            toAdd = 1;
+                        }
+                        emptyByteArray[count] = toAdd;
+                        count++;
+                    });
+                */
+
+                bool? response = sfd.ShowDialog();
+                if (response == true)
+                {
+                    string filePathToSave = sfd.FileName;
+                    System.IO.File.WriteAllBytes(filePathToSave, xd);
+                }
+                else
+                {
+                    
                 }
             }
             catch
             {
-                ErrorTextBlock_Encrypt.Text = "Unknown Error has occured!";
+                //ErrorTextBlock_Encrypt.Text = "Unknown Error has occured!";
             }
+
         }
 
         public void GenerateKeyForDecrypter()
@@ -250,7 +320,7 @@ namespace BSK_PPAOKW.PS
             }
             catch
             {
-                ErrorTextBlock_Decrypt.Text = "Unknown Error has occured!";
+               // ErrorTextBlock_Decrypt.Text = "Unknown Error has occured!";
             }
         }
 
