@@ -99,7 +99,7 @@ namespace BSK_PPAOKW.PS
             {
                 int rowLenght = ReadPolynomial(polynominal_encrypt, Powers);
                 ErrorTextBlock_Encrypt.Text = "";
-                LfsrMethod_Encrypt = new Lfsr(rowLenght);
+                LfsrMethod_Encrypt = new Lfsr(rowLenght,Powers);
                 LfsrMethod_Encrypt.IsStopped = false;
                 V_Encrypt.Visibility = Visibility.Visible;
                 ShowSeedToMe.Visibility = Visibility.Visible;
@@ -129,7 +129,7 @@ namespace BSK_PPAOKW.PS
             {
                 int rowLength = ReadPolynomial(polynominal_decrypt, Powers);
                 ErrorTextBlock_Decrypt.Text = "";
-                LfsrMethod_Decrypt = new Lfsr(rowLength);
+                LfsrMethod_Decrypt = new Lfsr(rowLength,Powers);
                 LfsrMethod_Decrypt.Seed = new bool[LfsrMethod_Decrypt.RowLength];
                 LfsrMethod_Decrypt.IsStopped = false;
             }

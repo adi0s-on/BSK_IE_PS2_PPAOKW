@@ -57,7 +57,7 @@ namespace BSK_PPAOKW.PS
                         }
                     }
                     ErrorTextBlock.Text = "";
-                    LfsrMethod = new Lfsr(Powers.Max());
+                    LfsrMethod = new Lfsr(Powers.Max(),Powers);
                     LfsrMethod.IsStopped = false;
                     V.Visibility = Visibility.Visible;
                     Result.Visibility = Visibility.Visible;

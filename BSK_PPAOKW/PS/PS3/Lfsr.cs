@@ -16,8 +16,27 @@ namespace BSK_PPAOKW.PS
         public bool IsStopped { get; set; }
         public bool[] KeySeed { get; set; }
         public bool[] Seed { get; set; }
-        public Lfsr(int rowLength)
+        public Lfsr(int rowLength, int[] key)
         {
+            int counter = 0;
+            for (int i = 0; i < key.Length; i++)
+            {
+                if(key[i] != 0)
+                {
+                    counter++;
+                }
+            }
+            Key = new int[counter];
+            counter = 0;
+            for (int i = 0; i < key.Length; i++)
+            {
+                if (key[i] != 0)
+                {
+                    Key[counter] = key[i];
+                    counter++;
+                }
+            }
+            Array.Sort(Key);
             RowLength = rowLength;
             FirstTime = true;
             UpperArray = new bool[rowLength];
@@ -30,10 +49,11 @@ namespace BSK_PPAOKW.PS
             {
                 int howManyTimesFalse = 0, howManyTimesTrue = 0;
                 //first line has to be random
+                Random random = new Random();
                 for (int i = 0; i < RowLength; i++)
                 {
-                    Random random = new Random();
-                    if (random.Next(0, 2) == 0)
+                    int number = random.Next(0, 2);
+                    if (number == 0)
                     {
                         UpperArray[i] = false; howManyTimesFalse++;
                     }
@@ -133,16 +153,36 @@ namespace BSK_PPAOKW.PS
             }
         }
 
-        public bool OperationXOR(bool[] row)
+        //public bool OperationXOR(bool[] row)
+        //{
+        //    if (row[0] != row[row.Length-1])
+        //    {
+        //        return true;
+        //    }
+        //    else
+        //    {
+        //        return false;
+        //    }
+        //}
+
+        public bool OperationXOR(bool[] row)        
         {
-            if (row[0] != row[row.Length-1])
+            int counter = 0;
+            bool result = row[Key[counter]-1];
+            counter++;
+            while (counter != Key.Length - 1)
             {
-                return true;
+                if (row[Key[counter]-1] != result)
+                {
+                    result = true;
+                }
+                else
+                {
+                    result = false;
+                }
+                counter++;
             }
-            else
-            {
-                return false;
-            }
+            return result;
         }
     }
 }
