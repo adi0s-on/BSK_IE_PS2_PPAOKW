@@ -12,9 +12,10 @@ namespace BSK_PPAOKW.PS
         public int[] Key { get; set; }
         public bool[] UpperArray { get; set; }
         public bool[] LowerArray { get; set; }
-        public bool  FirstTime { get; set; }
+        public bool FirstTime { get; set; }
         public bool IsStopped { get; set; }
-
+        public bool[] KeySeed { get; set; }
+        public bool[] Seed { get; set; }
         public Lfsr(int rowLength)
         {
             RowLength = rowLength;
@@ -27,7 +28,7 @@ namespace BSK_PPAOKW.PS
         {
             if (FirstTime)
             {
-                int howManyTimesFalse = 0, howManyTimesTrue = 0; 
+                int howManyTimesFalse = 0, howManyTimesTrue = 0;
                 //first line has to be random
                 for (int i = 0; i < RowLength; i++)
                 {
@@ -41,7 +42,8 @@ namespace BSK_PPAOKW.PS
                         UpperArray[i] = true; howManyTimesTrue++;
                     }
                 }
-                if(howManyTimesFalse == RowLength)
+                //not only one type of values in starting row
+                if (howManyTimesFalse == RowLength)
                 {
                     UpperArray[RowLength - 1] = true;
                 }
@@ -50,18 +52,21 @@ namespace BSK_PPAOKW.PS
                     UpperArray[RowLength - 1] = false;
                 }
 
+                KeySeed = new bool[UpperArray.Length];
+                for (int i = 0; i < UpperArray.Length; i++)
+                {
+                    KeySeed[i] = UpperArray[i];
+                }
+
                 //XOR first and last | Q1 and Qk
                 bool XORResult = OperationXOR(UpperArray);
-
-                LowerArray[0] = XORResult;  
+                LowerArray[0] = XORResult;
                 for (int i = 1; i < LowerArray.Length; i++)
                 {
                     LowerArray[i] = UpperArray[i - 1];
                 }
                 FirstTime = false;
-
-                return XORResult;
-
+                return UpperArray[UpperArray.Length - 1];
             }
 
             else
@@ -79,11 +84,56 @@ namespace BSK_PPAOKW.PS
                     LowerArray[i] = UpperArray[i - 1];
                 }
 
-                return XORResult;
+                return UpperArray[UpperArray.Length-1];
             }
         }
 
-        private bool OperationXOR(bool[] row)
+        public bool AddRowDecrypt()
+        {
+            if (FirstTime)
+            {
+                for (int i = 0; i < RowLength; i++)
+                {
+                    UpperArray[i] = Seed[i]; 
+                }
+
+                KeySeed = new bool[UpperArray.Length];
+                for (int i = 0; i < UpperArray.Length; i++)
+                {
+                    KeySeed[i] = UpperArray[i];
+                }
+
+                //XOR first and last | Q1 and Qk
+                bool XORResult = OperationXOR(UpperArray);
+                LowerArray[0] = XORResult;
+                for (int i = 1; i < LowerArray.Length; i++)
+                {
+                    LowerArray[i] = UpperArray[i - 1];
+                }
+                FirstTime = false;
+                return UpperArray[UpperArray.Length - 1];
+            }
+
+            else
+            {
+                for (int i = 0; i < UpperArray.Length; i++)
+                {
+                    UpperArray[i] = LowerArray[i];
+                }
+
+                bool XORResult = OperationXOR(UpperArray);
+                LowerArray[0] = XORResult;
+
+                for (int i = 1; i < LowerArray.Length; i++)
+                {
+                    LowerArray[i] = UpperArray[i - 1];
+                }
+
+                return UpperArray[UpperArray.Length - 1];
+            }
+        }
+
+        public bool OperationXOR(bool[] row)
         {
             if (row[0] != row[row.Length-1])
             {

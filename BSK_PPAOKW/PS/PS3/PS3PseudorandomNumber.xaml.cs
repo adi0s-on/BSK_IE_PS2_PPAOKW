@@ -159,7 +159,6 @@ namespace BSK_PPAOKW.PS
                             Result1.Text = resultStringMaxTwentyChars.Remove(resultStringMaxTwentyChars.Length - 8 - 5);
                         }
                     });
-
                     Thread.Sleep(120 - sliderValue);
                 }
             }
