@@ -35,16 +35,13 @@ namespace BSK_PPAOKW.PS
         public PS3StreamCipher()
         {
             InitializeComponent();
-            ProgressBar_Encrypt.Visibility = Visibility.Hidden;
-            ProgressBar_Decrypt.Visibility = Visibility.Hidden;
             Result_Encrypt.Visibility = Visibility.Hidden;
-            Result_Decrypt.Visibility = Visibility.Hidden;
             Encrypt_button.IsEnabled = false;
             Decrypt_button.IsEnabled = false;
             Encrypt_button.Background = Brushes.Gray;
             Decrypt_button.Background = Brushes.Gray;
             V_Encrypt.Visibility = Visibility.Hidden;
-            V_Decrypt.Visibility = Visibility.Hidden;
+            ShowSeedToMe.Visibility = Visibility.Hidden;
         }
 
         private void Open_file_encrypt(object sender, RoutedEventArgs e)
@@ -104,10 +101,9 @@ namespace BSK_PPAOKW.PS
                 ErrorTextBlock_Encrypt.Text = "";
                 LfsrMethod_Encrypt = new Lfsr(rowLenght);
                 LfsrMethod_Encrypt.IsStopped = false;
-                ProgressBar_Encrypt.Visibility = Visibility.Visible;
-                Result_Encrypt.Visibility = Visibility.Visible;
                 V_Encrypt.Visibility = Visibility.Visible;
-
+                ShowSeedToMe.Visibility = Visibility.Visible;
+                Result_Encrypt.Visibility = Visibility.Visible;
             }
             if(LfsrMethod_Encrypt != null)
             {
@@ -136,10 +132,6 @@ namespace BSK_PPAOKW.PS
                 LfsrMethod_Decrypt = new Lfsr(rowLength);
                 LfsrMethod_Decrypt.Seed = new bool[LfsrMethod_Decrypt.RowLength];
                 LfsrMethod_Decrypt.IsStopped = false;
-                ProgressBar_Decrypt.Visibility = Visibility.Visible;
-                Result_Decrypt.Visibility = Visibility.Visible;
-                V_Decrypt.Visibility = Visibility.Visible;
-
             }
             if (LfsrMethod_Decrypt != null)
             {

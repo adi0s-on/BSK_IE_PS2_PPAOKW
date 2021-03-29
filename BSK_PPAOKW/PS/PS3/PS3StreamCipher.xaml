@@ -14,15 +14,13 @@
             <TextBlock Width="110" Height="40" Text="Encrypt" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0 20 0 0" FontSize="26" TextAlignment="Left" Foreground="#222831"/>
             <TextBlock Width="270" Height="20"  VerticalAlignment="Top" HorizontalAlignment="Right" FontSize="15" Margin="0,88,320,0" Foreground="#393e46" Text="Choose file to encrypt"/>
             <Button Click="Open_file_encrypt" Width="180" Height="30" VerticalAlignment="Top" HorizontalAlignment="Left" Background="#00adb5" BorderBrush="#393e46" Margin="20,113,0,0" Content="Open file" Foreground="#222831" Padding="0" FontSize="15" />
-            <Button Click="ShowSeed" Width="180" Height="30" VerticalAlignment="Top" HorizontalAlignment="Left" Background="#00adb5" BorderBrush="#393e46" Margin="21,398,0,0" Content="Show seed" Foreground="#222831" Padding="0" FontSize="15" />
-            <TextBlock Width="304" Height="70" Name="Encrypt_file_name_textblock" VerticalAlignment="Top" HorizontalAlignment="Right" Text="" FontSize="13" Margin="0,108,56,0" Foreground="#393e46" TextWrapping="Wrap"/>
+            <Button Name="ShowSeedToMe" Click="ShowSeed" Width="105" Height="30" VerticalAlignment="Top" HorizontalAlignment="Left" Background="#00adb5" BorderBrush="#393e46" Margin="21,398,0,0" Content="Show seed" Foreground="#222831" Padding="0" FontSize="15" />
+            <TextBlock Width="304" Height="59" Name="Encrypt_file_name_textblock" VerticalAlignment="Top" HorizontalAlignment="Right" Text="" FontSize="13" Margin="0,108,56,0" Foreground="#393e46" TextWrapping="Wrap"/>
             <TextBlock Width="180" Height="23" Text="Enter polynomial" VerticalAlignment="Top" HorizontalAlignment="Right" FontSize="15" Margin="0,197,409,0" Foreground="#393e46"/>
             <TextBox Name ="Polynomial_Encrypt" Height="30" VerticalAlignment="Top" Margin="20,220,250,0" FontSize="14" BorderBrush="#393e46" BorderThickness="1 1 1 1" TextWrapping="Wrap" Background="#EEEEEE" MaxLength="20"/>
             <TextBlock Name="ErrorTextBlock_Encrypt" Height="30" Text="" Foreground="Red" VerticalAlignment="Top" FontSize="15" Margin="385,220,20,0" RenderTransformOrigin="0.5,0.5"/>
-            <TextBlock Name="V_Encrypt" Text="V" FontSize="22" TextAlignment="Center" Margin="20,433,56,111"/>
+            <TextBlock Name="V_Encrypt" Text="" FontSize="22" TextAlignment="Left" Margin="143,398,20,302"/>
             <Button Name="Encrypt_button" Click="Encrypt_from_file" Height="30" VerticalAlignment="Top" Background="#00adb5" BorderBrush="#393e46" Margin="20,267,250,0" Content="Encrypt" Foreground="#222831" Padding="0" FontSize="15"/>
-            <TextBlock Width="205" Name="Key_Encrypt" Height="47" VerticalAlignment="Top" HorizontalAlignment="Right" FontSize="34" Margin="0,250,20,0" Foreground="#393e46" TextAlignment="Right"/>
-            <ProgressBar Name="ProgressBar_Encrypt" Height="28" Margin="20,304,20,0" VerticalAlignment="Top" Background="#393e46" Foreground="#00adb5"/>
             <TextBlock Name="Result_Encrypt" Height="20"  VerticalAlignment="Top" FontSize="15" Margin="0,369,390,0" Foreground="#393e46" Text="Result" HorizontalAlignment="Right" Width="200"/>
 
         </Grid>
@@ -34,17 +32,13 @@
             <TextBlock Width="110" Height="40" VerticalAlignment="Top" Text="Decrypt" HorizontalAlignment="Center" Margin="0 20 0 0" FontSize="26" TextAlignment="Right" Foreground="#222831" />
             <TextBlock Width="270" Height="20"  VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="15" Margin="20 88 0 0" Foreground="#393e46" Text="Choose file to decrypt"/>
             <Button Click="Open_file_decrypt" Width="180" Height="30" VerticalAlignment="Top" HorizontalAlignment="Left" Background="#00adb5" BorderBrush="#393e46" Margin="20,113,0,0" Content="Open file" Foreground="#222831" Padding="0" FontSize="15" />
-            <TextBlock Width="304" Height="70" Name="Decrypt_file_name_textblock" VerticalAlignment="Top" HorizontalAlignment="Right" Text="" FontSize="13" Margin="0,108,56,0" Foreground="#393e46" TextWrapping="Wrap"/>
+            <TextBlock Width="304" Height="59" Name="Decrypt_file_name_textblock" VerticalAlignment="Top" HorizontalAlignment="Right" Text="" FontSize="13" Margin="0,108,56,0" Foreground="#393e46" TextWrapping="Wrap"/>
             <TextBlock Width="180" Height="23" Text="Enter polynomial" VerticalAlignment="Top" HorizontalAlignment="Right" FontSize="15" Margin="0,197,409,0" Foreground="#393e46"/>
             <TextBlock Width="180" Height="23" Text="Enter seed" VerticalAlignment="Top" HorizontalAlignment="Right" FontSize="15" Margin="0,169,409,0" Foreground="#393e46"/>
             <TextBox Name ="Polynomial_Decrypt" Height="30" VerticalAlignment="Top" Margin="20,220,250,0" FontSize="14" BorderBrush="#393e46" BorderThickness="1 1 1 1" TextWrapping="Wrap" Background="#EEEEEE" MaxLength="20"/>
-            <TextBox Name ="SeedTextBox" Height="30" VerticalAlignment="Top" Margin="106,167,360,0" FontSize="14" BorderBrush="#393e46" BorderThickness="1 1 1 1" TextWrapping="Wrap" Background="#EEEEEE" MaxLength="20"/>
+            <TextBox Name ="SeedTextBox" Height="30" VerticalAlignment="Top" Margin="106,167,250,0" FontSize="14" BorderBrush="#393e46" BorderThickness="1 1 1 1" TextWrapping="Wrap" Background="#EEEEEE" MaxLength="20"/>
             <TextBlock Name="ErrorTextBlock_Decrypt" Height="30" Text="" Foreground="Red" VerticalAlignment="Top" FontSize="15" Margin="385,220,20,0" RenderTransformOrigin="0.5,0.5"/>
-            <TextBlock Name="V_Decrypt" Text="V" FontSize="22" Width="20" Height="30" TextAlignment="Center" Margin="478,227,112,473"/>
             <Button Name="Decrypt_button" Click="Decrypt_from_file" Height="30" VerticalAlignment="Top" Background="#00adb5" BorderBrush="#393e46" Margin="20,267,250,0" Content="Decrypt" Foreground="#222831" Padding="0" FontSize="15"/>
-            <TextBlock Width="205" Name="Key_Decrypt" Height="47" VerticalAlignment="Top" HorizontalAlignment="Right" FontSize="34" Margin="0,250,20,0" Foreground="#393e46" TextAlignment="Right"/>
-            <ProgressBar Name="ProgressBar_Decrypt" Height="28" Margin="20,304,20,0" VerticalAlignment="Top" Background="#393e46" Foreground="#00adb5"/>
-            <TextBlock Name="Result_Decrypt" Height="20"  VerticalAlignment="Top" FontSize="15" Margin="0,369,390,0" Foreground="#393e46" Text="Result" HorizontalAlignment="Right" Width="200"/>
 
         </Grid>
 
