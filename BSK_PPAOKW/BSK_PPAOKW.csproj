@@ -101,6 +101,12 @@
     <Compile Include="PS\PS3\PS3.xaml.cs">
       <DependentUpon>PS3.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PS\PS4\PS4DES.xaml.cs">
+      <DependentUpon>PS4DES.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PS\PS4\PS4.xaml.cs">
+      <DependentUpon>PS4.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PS\WIP.xaml.cs">
       <DependentUpon>WIP.xaml</DependentUpon>
     </Compile>
@@ -155,6 +161,14 @@
     <Page Include="PS\PS3\PS3.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PS\PS4\PS4DES.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PS\PS4\PS4.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="PS\WIP.xaml">
       <SubType>Designer</SubType>
