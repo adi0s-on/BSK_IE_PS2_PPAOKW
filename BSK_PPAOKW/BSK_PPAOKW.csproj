@@ -66,6 +66,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="PS\PS4\DES.cs" />
     <Compile Include="PS\FileOpen.cs" />
     <Compile Include="PS\PS1\MatrixConversion.cs" />
     <Compile Include="PS\PS1\PS1MatrixConversions.xaml.cs">

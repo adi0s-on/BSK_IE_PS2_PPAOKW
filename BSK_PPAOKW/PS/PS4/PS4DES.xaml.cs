@@ -59,5 +59,13 @@ namespace BSK_PPAOKW.PS
             }
         }
 
+        private void Encrypt_Click(object sender, RoutedEventArgs e)
+        {
+            if(Encrypt_file_name_textblock.Text != "Wrong file format!")
+            {
+               DES des = new DES(System.IO.File.ReadAllBytes(Encrypt_file_name_textblock.Text));
+               des.StartAlgorytm();
+            }
+        }
     }
 }
