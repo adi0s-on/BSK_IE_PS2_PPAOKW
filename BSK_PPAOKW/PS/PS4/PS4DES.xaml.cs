@@ -23,6 +23,7 @@ namespace BSK_PPAOKW.PS
         public PS4DES()
         {
             InitializeComponent();
+            Key_Encrypt.Text = "1010101011100010111100100111101010010111110010101010101110000101";
         }
 
         private void Open_file_encrypt(object sender, RoutedEventArgs e)
@@ -64,7 +65,7 @@ namespace BSK_PPAOKW.PS
             if(Encrypt_file_name_textblock.Text != "Wrong file format!")
             {
                DES des = new DES(System.IO.File.ReadAllBytes(Encrypt_file_name_textblock.Text));
-               des.StartAlgorytm();
+               des.Algorythm();
             }
         }
     }
