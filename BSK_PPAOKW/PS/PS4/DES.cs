@@ -36,6 +36,47 @@ namespace BSK_PPAOKW.PS
             {
                 InitialPermutation(block);
                 DivideForTwoBlocks(block, out BitArray leftBlock, out BitArray rightBlock);
+
+
+                BitArray Rn = Expanding32BitsRBlockTo48Bits(rightBlock);
+                BitArray SeriesOfBits = new BitArray(48);
+                int KCounter = 0;
+                for (int i = 0; i < 48; i++)
+                {
+                    if(Kn[KCounter][0] != Rn[0])
+                    {
+                        SeriesOfBits[0] = true;
+                    }
+                    else
+                    {
+                        SeriesOfBits[0] = false;
+                    }
+                }
+                BitArray Series1 = new BitArray(8);
+                BitArray Series2 = new BitArray(8);
+                BitArray Series3 = new BitArray(8);
+                BitArray Series4 = new BitArray(8);
+                BitArray Series5 = new BitArray(8);
+                BitArray Series6 = new BitArray(8);
+
+
+                for (int i = 0; i < length; i++)
+                {
+
+                }
+                //BitArray SeriesOfBits2 = new BitArray(48, false);
+                //for (int i = 0; i < 48; i++)
+                //{
+                //    if (Kn[KCounter][0] != Rn[0])
+                //    {
+                //        SeriesOfBits2[0] = true;
+                //    }
+                //}
+
+                for (int i = 0; i < 16; i++)
+                {
+                    
+                }
             }
         }
         private void Input()
@@ -152,7 +193,6 @@ namespace BSK_PPAOKW.PS
                 }
             }
         }
-
         private BitArray CnDnFusionToKnAndPermutedChoice2(BitArray Cn, BitArray Dn)
         {
             BitArray Kn = new BitArray(48);
@@ -175,5 +215,14 @@ namespace BSK_PPAOKW.PS
             }
             return Kn;
         }
-    }
+        private BitArray Expanding32BitsRBlockTo48Bits(BitArray bitArray)
+        {
+            BitArray Bit48 = new BitArray(48);
+            for (int i = 0; i < 48; i++)
+            {
+                Bit48[i] = bitArray[ConstantValues.ExpandingPermutation[i]-1];
+            }
+            return Bit48;
+        }
+        } 
 }
