@@ -68,7 +68,7 @@ namespace BSK_PPAOKW.PS
         {
             if(Encrypt_file_name_textblock.Text != "Wrong file format!")
             {
-               DES des = new DES(System.IO.File.ReadAllBytes(Encrypt_file_name_textblock.Text),true);
+               DES des = new DES(System.IO.File.ReadAllBytes(Encrypt_file_name_textblock.Text),true,Key_Encrypt.Text.ToString());
                des.Algorythm();
                SaveFileDialog sfd = new SaveFileDialog();
                switch (fileExtension)
@@ -109,7 +109,7 @@ namespace BSK_PPAOKW.PS
         {
             if (Decrypt_file_name_textblock.Text != "Wrong file format!")
             {
-                DES des = new DES(System.IO.File.ReadAllBytes(Decrypt_file_name_textblock.Text), false);
+                DES des = new DES(System.IO.File.ReadAllBytes(Decrypt_file_name_textblock.Text), false, Key_Decrypt.Text.ToString());
                 des.Algorythm();
                 SaveFileDialog sfd = new SaveFileDialog();
                 switch (fileExtension)

@@ -18,14 +18,14 @@ namespace BSK_PPAOKW.PS
                                                   61, 53, 45, 37, 29, 21, 13, 5,
                                                   63, 55, 47, 39, 31, 23, 15, 7};
 
-        public static int[] PermutedChoice1 = { 57, 49, 41, 33, 25, 17, 9,
-                                                1, 58, 50, 42, 34, 26, 17,
+        public static int[] PermutedChoice1 = {57, 49, 41, 33, 25, 17, 9,
+                                                1, 58, 50, 42, 34, 26, 18,
                                                 10, 2, 59, 51, 43, 35, 27,
                                                 19, 11, 3, 60, 52, 44, 36,
                                                 63, 55, 47, 39, 31, 23, 15,
                                                 7, 62, 54, 46, 38, 30, 22,
                                                 14, 6, 61, 53, 45, 37, 29,
-                                                21, 13, 5, 28, 28, 20, 12, 4 };
+                                                21, 13, 5, 28, 20, 12, 4 };
 
         public static int[] PermutedChoice2 = {14, 17, 11, 24, 1, 5,
                                                 3, 28, 15, 6, 21, 10,
@@ -97,14 +97,15 @@ namespace BSK_PPAOKW.PS
         {
             List<int[,]> Tabulars = new List<int[,]>();
 
-            int[,] TabularData = new int[4,8];
+            int[,] TabularData;
             int numberCounter;
             for (int s = 1; s < 9; s++)
             {
+                TabularData = new int[4, 16];
                 numberCounter = 0;
                 for (int i = 0; i < 4; i++)
                 {
-                    for (int j = 0; j < 8; j++)
+                    for (int j = 0; j < 16; j++)
                     {
 
                         switch (s)

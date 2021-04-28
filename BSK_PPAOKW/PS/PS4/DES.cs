@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace BSK_PPAOKW.PS
 {
@@ -18,11 +19,11 @@ namespace BSK_PPAOKW.PS
         private int KCounter { get; set; }
         private bool Encrypt { get; set; }
         public byte[] Result { get; set; }
-        public DES(byte[] content, bool encrypt)
+        public DES(byte[] content, bool encrypt, string key)
         {
             Content = content;
             Bits = new List<BitArray>();
-            Key = new BitArray(64);
+            Key = new BitArray(key.Select(x => x == '1').ToArray());
             KeyLeft = new BitArray[17];
             KeyRight = new BitArray[17];
             Kn = new BitArray[16];
@@ -46,8 +47,8 @@ namespace BSK_PPAOKW.PS
             {
                 InputForDecrypt();
             }
-            KeyTransformFor56Bits(Key);
-            DivideKeyFor28Bits(Key, out BitArray leftKey, out BitArray rightKey);
+            BitArray key = KeyTransformFor56Bits(Key);
+            DivideKeyFor28Bits(key, out BitArray leftKey, out BitArray rightKey);
             KeyMovingIterations(leftKey, rightKey);
             for (int i = 1; i < 17; i++)
             {
@@ -63,14 +64,18 @@ namespace BSK_PPAOKW.PS
                 {
                     KCounter = 15;
                 }
-                InitialPermutation(block);
-                DivideForTwoBlocks(block, out BitArray leftBlock, out BitArray rightBlock);
-                //RANDOM PROGRAMMING
-                BitArray RnNext = new BitArray(64);
+                BitArray afterIP = InitialPermutation(block);
+                DivideForTwoBlocks(afterIP, out BitArray leftBlock, out BitArray rightBlock);
+
+                BitArray leftBlockWorking = leftBlock;
+                BitArray rightBlockWorking = rightBlock;
+
+                BitArray RnNext = null;
+                //after that we should get R16 and L16
                 for (int n = 0; n < 16; n++)
                 {
                     RnNext = new BitArray(32);
-                    BitArray blockToXorWithLnFromRn = PermutateWithP(STables(Expanding32BitsRBlockTo48Bits(rightBlock)));
+                    BitArray blockToXorWithLnFromRn = PermutateWithP(STables(Expanding32BitsRBlockTo48Bits(rightBlockWorking)));
                     if(Encrypt)
                     {
                         KCounter++;
@@ -81,21 +86,22 @@ namespace BSK_PPAOKW.PS
                     }
                     for (int i = 0; i < 32; i++)
                     {
-                        if (leftBlock[i] != blockToXorWithLnFromRn[i])
+                        if (leftBlockWorking[i] != blockToXorWithLnFromRn[i])
                         {
                             RnNext[i] = true;
                         }
                     }
-                    leftBlock = blockToXorWithLnFromRn;
+                    leftBlockWorking = blockToXorWithLnFromRn;
+                    rightBlockWorking = RnNext;
                 }
                 BitArray MergeRightAndLeft = new BitArray(64);
                 for (int i = 0; i < 32; i++)
                 {
-                    MergeRightAndLeft[i] = RnNext[i];
+                    MergeRightAndLeft[i] = rightBlockWorking[i];
                 }
                 for (int i = 32; i < 64; i++)
                 {
-                    MergeRightAndLeft[i] = leftBlock[i-32];
+                    MergeRightAndLeft[i] = leftBlockWorking[i-32];
                 }
                 BitArray result = InvertedInitialPermutation(MergeRightAndLeft);
                 ResultsIn64BitArrays.Add(result);
@@ -103,21 +109,17 @@ namespace BSK_PPAOKW.PS
             BitArray AllBits = BitArraysToByteArray(ResultsIn64BitArrays);
             Result = BitArrayToByteArray(AllBits);
 
-            //byte helper;
-            //helper = Result[Result.Length - 1];
-            //string lastByte = Convert.ToString(helper, 2).PadLeft(8, '0');
-            //byte helper2 = Convert.ToByte(Convert.ToInt32(lastByte.Substring(0, 3),2));
-            //Result[Result.Length - 1] = helper2;
-            //Console.WriteLine("");
+            //Unfinished attempt to decrypt, unfinished because of encrypting not working correctly 
+            if(!Encrypt)
+            {
+                byte[] helperResult = new byte[Result.Length - 5];
+                for (int i = 0; i < helperResult.Length; i++)
+                {
+                    helperResult[i] = Result[i];
+                }
+                Result = helperResult;
+            }
 
-            //byte[] helperResult = new byte[Result.Length - 5];
-            //for (int i = 0; i < helperResult.Length; i++)
-            //{
-            //    helperResult[i] = Result[i];
-            //}
-
-            //Result = helperResult;
-            
         }
         private void InputForEncrypt()
         {
@@ -174,17 +176,14 @@ namespace BSK_PPAOKW.PS
                 Bits.Add(new BitArray(block));
             }
         }
-        private void InitialPermutation(BitArray bitArray)
+        private BitArray InitialPermutation(BitArray bitArray)
         {
             BitArray helper = new BitArray(64);
             for (int i = 0; i < 64; i++)
             {
-                helper[i] = bitArray[i];
+                helper[i] = bitArray[ConstantValues.InitialPermutation[i]-1];
             }
-            for (int i = 0; i < 64; i++)
-            {
-                bitArray[i] = helper[ConstantValues.InitialPermutation[i]-1];
-            }
+            return helper;
         }
         private void DivideForTwoBlocks(BitArray bitArray, out BitArray left, out BitArray right)
         {
@@ -199,19 +198,14 @@ namespace BSK_PPAOKW.PS
                 right[i-32] = bitArray[i];
             }
         }
-        private void KeyTransformFor56Bits(BitArray key)
+        private BitArray KeyTransformFor56Bits(BitArray key)
         {
-            BitArray helper = new BitArray(64);
-            for (int i = 0; i < 64; i++)
-            {
-                helper[i] = key[i];
-            }
-
-            key = new BitArray(56);
+            BitArray keyToReturn = new BitArray(56);
             for (int i = 0; i < 56; i++)
             {
-                key[i] = helper[ConstantValues.PermutedChoice1[i] - 1];
+                keyToReturn[i] = key[ConstantValues.PermutedChoice1[i] - 1];
             }
+            return keyToReturn;
         }
         private void DivideKeyFor28Bits(BitArray key,out BitArray left, out BitArray right)
         {
@@ -240,7 +234,7 @@ namespace BSK_PPAOKW.PS
                 if (ConstantValues.CnDnBitMove[i - 1] == 1)
                 {
                     bool bit = bitArrays[i][0];
-                    for (int j = 1; j < 27; j++)
+                    for (int j = 1; j <= 27; j++)
                     {
                         bitArrays[i][j - 1] = bitArrays[i][j];
                     }
@@ -250,9 +244,9 @@ namespace BSK_PPAOKW.PS
                 {
                     bool bit = bitArrays[i][0];
                     bool bit2 = bitArrays[i][1];
-                    for (int j = 1; j < 27; j++)
+                    for (int j = 2; j <= 27; j++)
                     {
-                        bitArrays[i][j - 1] = bitArrays[i][j];
+                        bitArrays[i][j - 2] = bitArrays[i][j];
                     }
                     bitArrays[i][26] = bit;
                     bitArrays[i][27] = bit2;
@@ -261,23 +255,24 @@ namespace BSK_PPAOKW.PS
         }
         private BitArray CnDnFusionToKnAndPermutedChoice2(BitArray Cn, BitArray Dn)
         {
-            BitArray Kn = new BitArray(48);
-            for (int i = 0; i < 24; i++)
+            BitArray Kn = new BitArray(56);
+            for (int i = 0; i < 28; i++)
             {
                 Kn[i] = Cn[i];
             }
-            for (int i = 24; i < 48; i++)
+            for (int i = 28; i < 56; i++)
             {
-                Kn[i] = Dn[i-24];
+                Kn[i] = Dn[i-28];
             }
-            BitArray helper = new BitArray(48);
-            for (int i = 0; i < 48; i++)
+            BitArray helper = new BitArray(56);
+            for (int i = 0; i < 56; i++)
             {
                 helper[i] = Kn[i];
             }
+            Kn = new BitArray(48);
             for (int i = 0; i < 48; i++)
             {
-                Kn[i] = helper[ConstantValues.ExpandingPermutation[i] - 1];
+                Kn[i] = helper[ConstantValues.PermutedChoice2[i] - 1];
             }
             return Kn;
         }
@@ -295,13 +290,13 @@ namespace BSK_PPAOKW.PS
             BitArray SeriesOfBits = new BitArray(48);
             for (int i = 0; i < 48; i++)
             {
-                if (Kn[KCounter][0] != Rn[0])
+                if (Kn[KCounter][i] != Rn[i])
                 {
-                    SeriesOfBits[0] = true;
+                    SeriesOfBits[i] = true;
                 }
                 else
                 {
-                    SeriesOfBits[0] = false;
+                    SeriesOfBits[i] = false;
                 }
             }
             BitArray[] SeriesArray = new BitArray[8];
@@ -316,11 +311,19 @@ namespace BSK_PPAOKW.PS
                 }
             }
             List<int[,]> TabularData = ConstantValues.GetTabular_S();
+
+            BitArray[] Series4Bits = new BitArray[8];
+
             for (int s = 0; s < 8; s++)
             {
                 int row = Convert.ToInt32(Convert.ToInt32(SeriesArray[s][0]).ToString() + Convert.ToInt32(SeriesArray[s][5]).ToString(), 2);
                 int column = Convert.ToInt32(Convert.ToInt32(SeriesArray[s][1]).ToString() + Convert.ToInt32(SeriesArray[s][2]).ToString() + Convert.ToInt32(SeriesArray[s][3]).ToString() + Convert.ToInt32(SeriesArray[s][4]).ToString(), 2);
-                SeriesArray[s] = new BitArray(new int[] { TabularData[s][row, column] });
+                Series4Bits[s] = new BitArray(4);
+                string number = Convert.ToString(TabularData[s][row, column],2);
+                for (int i = 0; i < number.Length; i++)
+                {
+                    Series4Bits[s][i] = Convert.ToBoolean(Convert.ToInt32(number[i]));
+                }
             }
 
             BitArray Bit32ArrayToReturn = new BitArray(32);
