@@ -90,7 +90,59 @@ namespace BSK_PPAOKW.PS
                                     1, 15, 13, 8, 10, 3, 7,  4, 12, 5, 6, 11, 0, 14, 9, 2,
                                     7, 11, 4, 1, 9, 12, 14, 2, 0, 6, 10, 13, 15, 3, 5, 8,
                                     2, 1, 14, 7, 4, 10, 8, 13, 15, 12, 9, 0, 3, 5, 6, 11 };
+
         public static int[] CnDnBitMove = { 1, 1, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 1 };
 
+        public static List<int[,]> GetTabular_S()
+        {
+            List<int[,]> Tabulars = new List<int[,]>();
+
+            int[,] TabularData = new int[4,8];
+            int numberCounter;
+            for (int s = 1; s < 9; s++)
+            {
+                numberCounter = 0;
+                for (int i = 0; i < 4; i++)
+                {
+                    for (int j = 0; j < 8; j++)
+                    {
+
+                        switch (s)
+                        {
+                            case 1:
+                                TabularData[i, j] = S1[numberCounter];
+                                break;
+                            case 2:
+                                TabularData[i, j] = S2[numberCounter];
+                                break;
+                            case 3:
+                                TabularData[i, j] = S3[numberCounter];
+                                break;
+                            case 4:
+                                TabularData[i, j] = S4[numberCounter];
+                                break;
+                            case 5:
+                                TabularData[i, j] = S5[numberCounter];
+                                break;
+                            case 6:
+                                TabularData[i, j] = S6[numberCounter];
+                                break;
+                            case 7:
+                                TabularData[i, j] = S7[numberCounter];
+                                break;
+                            case 8:
+                                TabularData[i, j] = S8[numberCounter];
+                                break;
+                            default:
+                                break;                                
+                        }
+                        numberCounter++;
+                    }
+                }
+                Tabulars.Add(TabularData);
+            }
+            return Tabulars;
+
+        }
     }
 }
