@@ -91,9 +91,11 @@ namespace BSK_PPAOKW.PS
                             RnNext[i] = true;
                         }
                     }
-                    leftBlockWorking = blockToXorWithLnFromRn;
+
+                    leftBlockWorking = rightBlock;
                     rightBlockWorking = RnNext;
                 }
+
                 BitArray MergeRightAndLeft = new BitArray(64);
                 for (int i = 0; i < 32; i++)
                 {
@@ -223,10 +225,10 @@ namespace BSK_PPAOKW.PS
         private void KeyMovingIterations(BitArray leftKey, BitArray rightKey)
         {
             KeyLeft[0] = leftKey; KeyRight[0] = rightKey;
-            BitsShifting(KeyLeft);
-            BitsShifting(KeyRight);
+            KeyLeft = BitsShifting(KeyLeft);
+            KeyRight = BitsShifting(KeyRight);
         }
-        private void BitsShifting(BitArray[] bitArrays)
+        private BitArray[] BitsShifting(BitArray[] bitArrays)
         {
             for (int i = 1; i < 17; i++)
             {
@@ -252,6 +254,7 @@ namespace BSK_PPAOKW.PS
                     bitArrays[i][27] = bit2;
                 }
             }
+            return bitArrays;
         }
         private BitArray CnDnFusionToKnAndPermutedChoice2(BitArray Cn, BitArray Dn)
         {
